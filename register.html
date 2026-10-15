@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Ký Tài Khoản Học Sinh - EduTHCS</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- CSS Styles -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css">
+</head>
+<body class="auth-body">
+
+    <!-- Toast Notification -->
+    <div id="toastNotification" class="toast-box"></div>
+
+    <!-- Header tối giản -->
+    <header class="auth-header">
+        <div class="container auth-header-inner">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-book-open-reader"></i>
+                </div>
+                <div class="logo-text">
+                    <span class="brand-name">Edu<span class="highlight">THCS</span></span>
+                    <span class="brand-slogan">Vững bước Cấp 2 - Tự tin vào 10</span>
+                </div>
+            </a>
+            <div class="auth-header-links">
+                <span>Đã có tài khoản?</span>
+                <a href="login.html" class="btn btn-sm btn-outline"><i class="fa-solid fa-arrow-right-to-bracket"></i> Đăng Nhập</a>
+                <a href="index.html" class="back-home-link"><i class="fa-solid fa-arrow-left"></i> Về Trang Chủ</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Thân trang Đăng Ký -->
+    <main class="auth-main">
+        <div class="auth-container">
+            
+            <!-- Cột trái: Khích lệ học sinh -->
+            <div class="auth-banner">
+                <div class="banner-overlay"></div>
+                <div class="banner-content">
+                    <div class="banner-tag">
+                        <i class="fa-solid fa-gift"></i> Miễn phí 100% tài liệu
+                    </div>
+                    <h2>Tạo Tài Khoản Để Nhận Ngay Bộ Cẩm Nang Học Tốt Cấp 2</h2>
+                    <p>Tham gia cùng hơn 15.000+ học sinh THCS trên cả nước để tự tin chinh phục các bài kiểm tra và kỳ thi vào lớp 10.</p>
+                    
+                    <div class="banner-highlights">
+                        <div class="highlight-item">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span>Tặng Sổ tay công thức Toán 6-9 dạng Mindmap</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span>Kho 500+ bài văn mẫu chọn lọc điểm cao</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span>Audio phát âm chuẩn theo SGK Tiếng Anh mới</span>
+                        </div>
+                    </div>
+
+                    <div class="banner-quote">
+                        <i class="fa-solid fa-quote-left quote-icon"></i>
+                        <p class="quote-text">"Học tập là hạt giống của tri thức, tri thức là hạt giống của hạnh phúc."</p>
+                        <span class="quote-author">- Ngạn ngữ học đường</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cột phải: Form Đăng Ký -->
+            <div class="auth-card">
+                <div class="auth-card-header">
+                    <h1 class="auth-title">Đăng Ký Tài Khoản Mới ✍️</h1>
+                    <p class="auth-desc">Điền thông tin để bắt đầu hành trình học tập tại EduTHCS</p>
+                </div>
+
+                <form id="registerForm" onsubmit="handleRegisterSubmit(event)">
+                    
+                    <!-- Họ và tên -->
+                    <div class="form-group">
+                        <label for="regFullName" class="form-label">Họ và tên của bạn <span class="required">*</span></label>
+                        <div class="input-wrapper">
+                            <i class="fa-regular fa-user input-icon"></i>
+                            <input type="text" id="regFullName" class="form-input" placeholder="Ví dụ: Nguyễn Hoàng Nam..." required>
+                        </div>
+                    </div>
+
+                    <!-- Email / Tên đăng nhập -->
+                    <div class="form-group">
+                        <label for="regUsername" class="form-label">Email hoặc Tên đăng nhập <span class="required">*</span></label>
+                        <div class="input-wrapper">
+                            <i class="fa-regular fa-envelope input-icon"></i>
+                            <input type="text" id="regUsername" class="form-input" placeholder="Ví dụ: nam.nh@gmail.com..." required>
+                        </div>
+                        <span class="error-msg" id="regUsernameError"></span>
+                    </div>
+
+                    <!-- Khối lớp -->
+                    <div class="form-group">
+                        <label for="regGrade" class="form-label">Bạn đang học lớp nào? <span class="required">*</span></label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-graduation-cap input-icon"></i>
+                            <select id="regGrade" class="form-input" style="cursor: pointer;">
+                                <option value="6">Học sinh Khối Lớp 6 (Bứt phá khởi đầu)</option>
+                                <option value="7">Học sinh Khối Lớp 7 (Nâng cao tư duy)</option>
+                                <option value="8">Học sinh Khối Lớp 8 (Bứt phá kiến thức)</option>
+                                <option value="9" selected>Học sinh Khối Lớp 9 (Luyện thi vào 10)</option>
+                                <option value="parent">Phụ huynh học sinh</option>
+                                <option value="teacher">Giáo viên bộ môn</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Mật khẩu -->
+                    <div class="form-group">
+                        <label for="regPassword" class="form-label">Mật khẩu <span class="required">*</span></label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-lock input-icon"></i>
+                            <input type="password" id="regPassword" class="form-input" placeholder="Tối thiểu 6 ký tự..." required>
+                            <button type="button" class="btn-toggle-pwd" onclick="togglePasswordVisibility('regPassword', this)">
+                                <i class="fa-regular fa-eye"></i>
+                            </button>
+                        </div>
+                        <span class="error-msg" id="regPasswordError"></span>
+                    </div>
+
+                    <!-- Đồng ý điều khoản -->
+                    <div class="form-extra">
+                        <label class="custom-checkbox">
+                            <input type="checkbox" id="agreeTerms" checked required>
+                            <span class="checkmark"></span>
+                            <span class="checkbox-label">Tôi đồng ý với Quy định học tập lành mạnh tại EduTHCS</span>
+                        </label>
+                    </div>
+
+                    <!-- Nút Submit -->
+                    <button type="submit" class="btn btn-lg btn-primary btn-auth-submit" id="btnRegisterSubmit">
+                        <span class="btn-text"><i class="fa-solid fa-user-check"></i> Hoàn Tất Đăng Ký</span>
+                        <span class="btn-loading d-none"><i class="fa-solid fa-spinner fa-spin"></i> Đang khởi tạo...</span>
+                    </button>
+
+                    <div class="auth-security-notice">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span>Bản demo tĩnh lưu dữ liệu và mật khẩu trong localStorage. Không dùng thông tin thật hoặc mật khẩu đang dùng ở nơi khác.</span>
+                    </div>
+
+                    <div class="auth-extra-links">
+                        <span>Đã có tài khoản từ trước?</span>
+                        <a href="login.html" class="back-link">Đăng nhập tại đây</a>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Chân trang -->
+    <footer class="auth-footer">
+        <div class="container auth-footer-inner">
+            <p>&copy; 2026 EduTHCS. Hệ thống hỗ trợ học tập cấp Trung học Cơ sở toàn diện.</p>
+            <div class="footer-help-links">
+                <span>Bản demo tĩnh</span>
+                <span class="dot">•</span>
+                <a href="login.html">Đăng nhập</a>
+                <span class="dot">•</span>
+                <a href="index.html">Trang chủ</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script File -->
+    <script src="auth.js"></script>
+    <script>
+        function handleRegisterSubmit(event) {
+            event.preventDefault();
+            const fullName = document.getElementById('regFullName').value.trim();
+            const username = document.getElementById('regUsername').value.trim();
+            const grade = document.getElementById('regGrade').value;
+            const password = document.getElementById('regPassword').value.trim();
+            const usernameError = document.getElementById('regUsernameError');
+            const passwordError = document.getElementById('regPasswordError');
+            const btn = document.getElementById('btnRegisterSubmit');
+
+            usernameError.innerText = '';
+            passwordError.innerText = '';
+
+            if (password.length < 6) {
+                passwordError.innerText = 'Mật khẩu phải có tối thiểu 6 ký tự!';
+                return;
+            }
+
+            const users = getStoredUsers();
+            if (users.some(u => u.username.toLowerCase() === username.toLowerCase())) {
+                usernameError.innerText = 'Tên đăng nhập / Email này đã được đăng ký!';
+                return;
+            }
+
+            let role = 'student';
+            let roleName = `Học Sinh Lớp ${grade}`;
+            if (grade === 'parent') { role = 'parent'; roleName = 'Phụ Huynh'; }
+            if (grade === 'teacher') { role = 'teacher'; roleName = 'Giáo Viên THCS'; }
+
+            const newUser = {
+                id: 'acc_' + Date.now(),
+                username: username,
+                password: password,
+                fullName: fullName,
+                role: role,
+                roleName: roleName,
+                school: role === 'student' ? `Học sinh Khối Lớp ${grade}` : '',
+                createdAt: new Date().toISOString()
+            };
+
+            users.push(newUser);
+            saveStoredUsers(users);
+
+            setBtnLoading(btn, true);
+
+            setTimeout(() => {
+                setBtnLoading(btn, false);
+                // Tự động đăng nhập
+                localStorage.setItem('eduthcs_user', JSON.stringify({
+                    username: newUser.username,
+                    fullName: newUser.fullName,
+                    role: newUser.role,
+                    roleName: newUser.roleName,
+                    school: newUser.school,
+                    loginTime: new Date().toISOString()
+                }));
+
+                showToast(`🎉 Đăng ký thành công! Chào mừng ${fullName} đến với EduTHCS.`, 'success');
+
+                setTimeout(() => {
+                    window.location.href = 'user-dashboard.html';
+                }, 1000);
+            }, 800);
+        }
+    </script>
+</body>
+</html>

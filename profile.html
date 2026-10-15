@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hồ Sơ Cá Nhân - EduTHCS</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css">
+    <link rel="stylesheet" href="profile.css">
+</head>
+<body class="profile-body">
+
+    <!-- Toast Notification -->
+    <div id="toastNotification" class="toast-box"></div>
+
+    <!-- Thanh Topbar -->
+    <header class="profile-topbar">
+        <div class="container profile-topbar-inner">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-book-open-reader"></i>
+                </div>
+                <div class="logo-text">
+                    <span class="brand-name">Edu<span class="highlight">THCS</span></span>
+                    <span class="brand-slogan">Trang Cá Nhân Tài Khoản</span>
+                </div>
+            </a>
+
+            <div class="profile-topbar-right">
+                <a href="index.html" class="btn btn-sm btn-outline"><i class="fa-solid fa-house"></i> Trang Chủ</a>
+                <a href="user-dashboard.html" class="btn btn-sm btn-outline"><i class="fa-solid fa-chart-line"></i> Góc Học Tập</a>
+                <a href="admin.html" class="btn btn-sm btn-outline"><i class="fa-solid fa-user-shield"></i> Trang Admin</a>
+                <button class="btn btn-sm btn-outline-danger" onclick="handleUserLogout()" title="Đăng xuất">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng Xuất
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Thanh Chuyển Đổi Nhanh Tài Khoản (Quick Switcher) -->
+    <section class="profile-switcher-banner">
+        <div class="container switcher-inner">
+            <div class="switcher-label">
+                <i class="fa-solid fa-id-badge"></i>
+                <span>Xem trang cá nhân của tài khoản:</span>
+            </div>
+            <div class="switcher-buttons" id="accountSwitcherButtons">
+                <!-- Sẽ được render động bởi profile.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Thông báo nếu là khách xem mẫu -->
+    <div id="guestNoticeBar" style="display:none; background:#eff6ff; border-bottom:1px solid #bfdbfe; padding:8px 0; text-align:center; font-size:0.86rem; color:#1e40af;">
+        <i class="fa-solid fa-circle-info"></i> Hồ sơ minh họa trong demo tĩnh. <a href="register.html" style="font-weight:700; color:#2563eb; text-decoration:underline;">Đăng ký tài khoản demo</a> để lưu hồ sơ trên thiết bị này.
+    </div>
+
+    <!-- Hero Profile Header & Avatar -->
+    <section class="profile-hero">
+        <div class="container">
+            <div class="profile-cover">
+                <div class="profile-cover-tag">
+                    <i class="fa-solid fa-graduation-cap"></i> Cổng Học Tập EduTHCS Cấp 2
+                </div>
+            </div>
+
+            <div class="profile-header-content">
+                <div class="profile-avatar-wrapper">
+                    <div class="profile-avatar-circle" id="profileAvatarCircle">
+                        <i class="fa-solid fa-user-graduate" id="profileAvatarIcon"></i>
+                        <span class="avatar-online-status" title="Đang trực tuyến"></span>
+                    </div>
+
+                    <div class="profile-title-area">
+                        <div class="profile-name-row">
+                            <h1 id="profileFullName">Đang tải...</h1>
+                            <span class="role-badge-pill role-badge-student" id="profileRoleBadge">
+                                <i class="fa-solid fa-user-graduate"></i> Học Sinh
+                            </span>
+                            <span id="ownerIndicatorBadge" class="role-badge-pill" style="background:#e0e7ff; color:#4338ca; border:1px solid #c7d2fe; display:none;">
+                                <i class="fa-solid fa-circle-check"></i> Tài Khoản Của Bạn
+                            </span>
+                        </div>
+                        <div class="profile-subtitle">
+                            <span id="profileUsername"><i class="fa-regular fa-at"></i> username</span>
+                            <span>•</span>
+                            <span id="profileSchoolSubtitle"><i class="fa-solid fa-school"></i> Trường THCS</span>
+                            <span>•</span>
+                            <span><i class="fa-regular fa-calendar"></i> Tham gia: <strong id="profileJoinDate">10/01/2026</strong></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-actions-area">
+                    <button class="btn btn-sm btn-primary" id="btnLoginAsUser" onclick="handleLoginAsCurrentViewingUser()" style="display:none;">
+                        <i class="fa-solid fa-arrow-right-to-bracket"></i> Đăng nhập bằng tài khoản này
+                    </button>
+                    <button class="btn btn-sm btn-secondary" onclick="switchProfileTab('edit')">
+                        <i class="fa-solid fa-user-pen"></i> Chỉnh Sửa Hồ Sơ
+                    </button>
+                    <button class="btn btn-sm btn-outline" onclick="switchProfileTab('password')">
+                        <i class="fa-solid fa-key"></i> Đổi Mật Khẩu
+                    </button>
+                </div>
+            </div>
+
+            <!-- Profile Navigation Tabs -->
+            <div class="profile-tabs-bar">
+                <button class="profile-tab-btn active" data-tab="overview" onclick="switchProfileTab('overview')">
+                    <i class="fa-solid fa-address-card"></i> Hồ Sơ & Thành Tích
+                </button>
+                <button class="profile-tab-btn" data-tab="edit" onclick="switchProfileTab('edit')">
+                    <i class="fa-solid fa-pen-to-square"></i> Cập Nhật Thông Tin
+                </button>
+                <button class="profile-tab-btn" data-tab="password" onclick="switchProfileTab('password')">
+                    <i class="fa-solid fa-shield-halved"></i> Đổi Mật Khẩu & Bảo Mật
+                </button>
+                <button class="profile-tab-btn" data-tab="activity" onclick="switchProfileTab('activity')">
+                    <i class="fa-solid fa-clock-rotate-left"></i> Nhật Ký Hoạt Động
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Thân Trang Chi Tiết -->
+    <main class="profile-content-area">
+        <div class="container">
+            <div class="profile-grid">
+                
+                <!-- CỘT TRÁI: THÔNG TIN CÁ NHÂN & LIÊN HỆ -->
+                <aside class="profile-sidebar-col">
+                    <div class="profile-side-card">
+                        <div class="card-heading">
+                            <i class="fa-solid fa-circle-user text-primary"></i> Thông Tin Cơ Bản
+                        </div>
+                        <div class="info-list">
+                            <div class="info-item">
+                                <span class="info-label"><i class="fa-regular fa-envelope"></i> Email Liên Hệ</span>
+                                <span class="info-val" id="sideInfoEmail">loading...</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label"><i class="fa-solid fa-phone"></i> Số Điện Thoại</span>
+                                <span class="info-val" id="sideInfoPhone">loading...</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label"><i class="fa-solid fa-venus-mars"></i> Giới Tính</span>
+                                <span class="info-val" id="sideInfoGender">Nam</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label"><i class="fa-regular fa-calendar-days"></i> Ngày Sinh</span>
+                                <span class="info-val" id="sideInfoDob">18/05/2011</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label"><i class="fa-solid fa-location-dot"></i> Địa Chỉ / Khu Vực</span>
+                                <span class="info-val" id="sideInfoAddress">Hà Nội, Việt Nam</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label"><i class="fa-solid fa-barcode"></i> Mã Định Danh Hệ Thống</span>
+                                <span class="info-val"><code id="profileIdCode">demo-profile</code></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profile-side-card">
+                        <div class="card-heading">
+                            <i class="fa-solid fa-quote-left text-orange"></i> Lời Giới Thiệu (Bio)
+                        </div>
+                        <p class="bio-text" id="sideInfoBio">
+                            Đang tải giới thiệu bản thân...
+                        </p>
+                    </div>
+
+                    <!-- Hỗ trợ kỹ thuật -->
+                    <div class="profile-side-card" style="background:#eff6ff; border-color:#bfdbfe;">
+                        <h4 style="font-size:0.95rem; color:#1e40af; margin-bottom:8px;">
+                            <i class="fa-solid fa-headset"></i> Cần Trợ Giúp Hồ Sơ?
+                        </h4>
+                        <p style="font-size:0.82rem; color:#3b82f6; line-height:1.5; margin-bottom:12px;">
+                            Nếu thông tin trường lớp hoặc mã định danh của bạn cần điều chỉnh từ phía nhà trường, hãy liên hệ với ban quản trị EduTHCS.
+                        </p>
+                        <span>Bản demo không có dịch vụ hỗ trợ trực tuyến.</span>
+                    </div>
+                </aside>
+
+                <!-- CỘT PHẢI: NỘI DUNG THEO TỪNG TAB -->
+                <div class="profile-main-col">
+                    
+                    <!-- TAB 1: TỔNG QUAN HỒ SƠ (Render động theo vai trò) -->
+                    <div class="profile-tab-pane active" id="tabPane-overview">
+                        <div id="roleSpecificOverviewArea">
+                            <!-- Được điền bởi generateStudentOverviewHTML / generateTeacherOverviewHTML / etc. -->
+                        </div>
+                    </div>
+
+                    <!-- TAB 2: CHỈNH SỬA THÔNG TIN CÁ NHÂN -->
+                    <div class="profile-tab-pane" id="tabPane-edit">
+                        <div class="profile-main-card">
+                            <div class="card-heading">
+                                <i class="fa-solid fa-pen-to-square text-primary"></i> Chỉnh Sửa Thông Tin Cá Nhân
+                            </div>
+                            <p style="font-size:0.88rem; color:#64748b; margin-bottom:20px;">
+                                Cập nhật các thông tin để hồ sơ học tập và liên lạc luôn chính xác nhất trên hệ thống EduTHCS.
+                            </p>
+
+                            <form id="editProfileForm" onsubmit="handleSaveProfileSubmit(event)">
+                                <div class="form-grid-2">
+                                    <div class="profile-form-group">
+                                        <label for="editFullName">Họ và Tên <span class="req">*</span></label>
+                                        <input type="text" id="editFullName" class="profile-form-control" required placeholder="Nhập họ và tên">
+                                    </div>
+
+                                    <div class="profile-form-group">
+                                        <label for="editUsername">Tên Đăng Nhập / Tên Tài Khoản</label>
+                                        <input type="text" id="editUsername" class="profile-form-control" readonly disabled>
+                                        <span class="form-helper"><i class="fa-solid fa-lock"></i> Tên đăng nhập là cố định để xác thực hệ thống.</span>
+                                    </div>
+
+                                    <div class="profile-form-group">
+                                        <label for="editEmail">Email Liên Hệ <span class="req">*</span></label>
+                                        <input type="email" id="editEmail" class="profile-form-control" required placeholder="email@eduthcs.edu.vn">
+                                    </div>
+
+                                    <div class="profile-form-group">
+                                        <label for="editPhone">Số Điện Thoại Liên Hệ</label>
+                                        <input type="tel" id="editPhone" class="profile-form-control" placeholder="Nhập số điện thoại">
+                                    </div>
+
+                                    <div class="profile-form-group">
+                                        <label for="editGender">Giới Tính</label>
+                                        <select id="editGender" class="profile-form-control">
+                                            <option value="Nam">Nam</option>
+                                            <option value="Nữ">Nữ</option>
+                                            <option value="Khác">Khác</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="profile-form-group">
+                                        <label for="editDob">Ngày Sinh</label>
+                                        <input type="date" id="editDob" class="profile-form-control">
+                                    </div>
+
+                                    <div class="profile-form-group full-width">
+                                        <label for="editSchool">Trường Học / Khối Lớp / Đơn Vị Công Tác</label>
+                                        <input type="text" id="editSchool" class="profile-form-control" placeholder="Nhập tên trường và lớp">
+                                    </div>
+
+                                    <div class="profile-form-group full-width">
+                                        <label for="editAddress">Địa Chỉ Nơi Cư Trú</label>
+                                        <input type="text" id="editAddress" class="profile-form-control" placeholder="Ví dụ: Quận Tây Hồ, TP. Hà Nội">
+                                    </div>
+
+                                    <div class="profile-form-group full-width">
+                                        <label for="editBio">Lời Tự Giới Thiệu / Mục Tiêu Rèn Luyện</label>
+                                        <textarea id="editBio" class="profile-form-control" rows="4" placeholder="Chia sẻ một vài câu về sở thích, mục tiêu học tập hoặc phương châm của bạn..."></textarea>
+                                    </div>
+                                </div>
+
+                                <div style="display:flex; justify-content:flex-end; gap:12px; margin-top:20px; padding-top:16px; border-top:1px solid #f1f5f9;">
+                                    <button type="button" class="btn btn-outline" onclick="switchProfileTab('overview')">
+                                        <i class="fa-solid fa-xmark"></i> Hủy Bỏ
+                                    </button>
+                                    <button type="submit" class="btn btn-primary btn-profile-submit">
+                                        <i class="fa-solid fa-floppy-disk"></i> Lưu Cập Nhật Hồ Sơ
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- TAB 3: ĐỔI MẬT KHẨU & BẢO MẬT -->
+                    <div class="profile-tab-pane" id="tabPane-password">
+                        <div class="profile-main-card">
+                            <div class="card-heading">
+                                <i class="fa-solid fa-lock text-primary"></i> Đổi Mật Khẩu Tài Khoản
+                            </div>
+                            <p style="font-size:0.88rem; color:#64748b; margin-bottom:20px;">
+                                Để bảo mật tài khoản học tập, bạn nên đặt mật khẩu dài tối thiểu 6 ký tự kết hợp chữ và số.
+                            </p>
+
+                            <form id="changePasswordForm" onsubmit="handleChangePasswordSubmit(event)">
+                                <div style="max-width:520px;">
+                                    <div class="profile-form-group">
+                                        <label for="pwdOldInput">Mật Khẩu Hiện Tại</label>
+                                        <input type="password" id="pwdOldInput" class="profile-form-control" placeholder="Nhập mật khẩu đang dùng..." required>
+                                        <span class="form-helper">Đây là bản demo tĩnh; không sử dụng mật khẩu thật.</span>
+                                    </div>
+
+                                    <div class="profile-form-group">
+                                        <label for="pwdNewInput">Mật Khẩu Mới <span class="req">*</span></label>
+                                        <input type="password" id="pwdNewInput" class="profile-form-control" required placeholder="Tối thiểu 6 ký tự...">
+                                        
+                                        <!-- Đo độ mạnh mật khẩu -->
+                                        <div style="height:6px; background:#e2e8f0; border-radius:3px; margin-top:8px; overflow:hidden;">
+                                            <div id="pwdStrengthBar" style="height:100%; width:0%; transition:all 0.3s ease;"></div>
+                                        </div>
+                                        <div id="pwdStrengthMsg" style="font-size:0.75rem; color:#64748b; margin-top:4px;">Độ bảo mật: Chưa nhập</div>
+                                    </div>
+
+                                    <div class="profile-form-group">
+                                        <label for="pwdConfirmInput">Xác Nhận Mật Khẩu Mới <span class="req">*</span></label>
+                                        <input type="password" id="pwdConfirmInput" class="profile-form-control" required placeholder="Nhập lại mật khẩu mới...">
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary btn-profile-submit" style="margin-top:10px;">
+                                        <i class="fa-solid fa-shield-halved"></i> Xác Nhận Đổi Mật Khẩu
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- TAB 4: NHẬT KÝ HOẠT ĐỘNG -->
+                    <div class="profile-tab-pane" id="tabPane-activity">
+                        <div class="profile-main-card">
+                            <div class="card-heading">
+                                <i class="fa-solid fa-clock-rotate-left text-primary"></i> Nhật Ký Hoạt Động & Đăng Nhập
+                            </div>
+                            <div class="table-responsive">
+                                <table class="activity-log-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Thời Gian</th>
+                                            <th>Hành Động</th>
+                                            <th>Thiết Bị / IP</th>
+                                            <th>Trạng Thái</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Hôm nay, 19:28</td>
+                                            <td>Đăng nhập thành công vào hệ thống EduTHCS</td>
+                                            <td>Chrome (Windows 11)</td>
+                                            <td><span class="role-badge-pill role-badge-teacher">Thành công</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Hôm qua, 20:15</td>
+                                            <td>Nộp bài kiểm tra trắc nghiệm Toán học 9</td>
+                                            <td>Chrome (Windows)</td>
+                                            <td><span class="role-badge-pill role-badge-student">Đã ghi nhận</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>12/10/2026, 14:00</td>
+                                            <td>Cập nhật mục tiêu điểm thi vào lớp 10</td>
+                                            <td>Mobile Web (iOS)</td>
+                                            <td><span class="role-badge-pill role-badge-student">Hoàn tất</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>10/10/2026, 08:30</td>
+                                            <td>Tải tài liệu tóm tắt công thức KHTN 8 & 9</td>
+                                            <td>Desktop App</td>
+                                            <td><span class="role-badge-pill role-badge-student">Tải thành công</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Chân Trang Cá Nhân -->
+    <footer class="profile-footer">
+        <div class="container profile-footer-inner">
+            <p>&copy; 2026 EduTHCS. Nền tảng học tập cấp Trung học Cơ sở toàn diện.</p>
+            <div style="display:flex; gap:16px;">
+                <a href="index.html" style="color:#64748b;">Trang Chủ</a>
+                <a href="user-dashboard.html" style="color:#64748b;">Góc Học Tập</a>
+                <a href="admin.html" style="color:#64748b;">Quản Trị</a>
+                <a href="login.html" style="color:#64748b;">Đổi Tài Khoản</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script Files -->
+    <script src="auth.js"></script>
+    <script src="profile.js"></script>
+</body>
+</html>

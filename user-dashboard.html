@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Góc Học Tập Cá Nhân - EduTHCS</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="user-dashboard.css">
+</head>
+<body class="dashboard-body">
+
+    <!-- Toast Notification -->
+    <div id="toastNotification" class="toast-box"></div>
+
+    <!-- Thanh Topbar Học Sinh -->
+    <header class="dash-topbar">
+        <div class="container dash-topbar-inner">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-book-open-reader"></i>
+                </div>
+                <div class="logo-text">
+                    <span class="brand-name">Edu<span class="highlight">THCS</span></span>
+                    <span class="brand-slogan">Góc Học Tập Cá Nhân</span>
+                </div>
+            </a>
+
+            <div class="dash-topbar-right">
+                <a href="index.html" class="btn btn-sm btn-outline"><i class="fa-solid fa-house"></i> Trang Chủ</a>
+                <a href="exam.html" class="btn btn-sm btn-primary shadow-pulse"><i class="fa-solid fa-file-pen"></i> Phòng Thi (00:00 T2)</a>
+                <a href="profile.html" class="btn btn-sm btn-outline" title="Xem & Chỉnh sửa hồ sơ cá nhân"><i class="fa-solid fa-id-badge"></i> Trang Cá Nhân</a>
+                
+                <a href="profile.html" class="student-profile-pill" style="text-decoration:none; color:inherit;" title="Xem hồ sơ cá nhân">
+                    <div class="student-avatar" id="studentAvatarIcon">
+                        <i class="fa-solid fa-user-graduate"></i>
+                    </div>
+                    <div class="student-meta">
+                        <strong id="displayStudentName">Học sinh demo</strong>
+                        <span id="displayStudentRole">Tài khoản demo</span>
+                    </div>
+                </a>
+                <button class="btn-logout-icon" onclick="handleUserLogout()" title="Đăng xuất">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Thân trang Góc Học Tập -->
+    <main class="dash-main">
+        <div class="container">
+            
+            <!-- Banner Chào Học Sinh -->
+            <div class="student-welcome-banner">
+                <div class="welcome-text">
+                    <span class="sub-badge"><i class="fa-solid fa-sparkles"></i> Chăm chỉ mỗi ngày</span>
+                    <h1 class="welcome-title">Xin chào, <span id="welcomeNameGreeting" class="text-gradient">Học sinh demo</span>! 🚀</h1>
+                    <p class="welcome-desc">
+                        Hôm nay bạn có <strong>2 bài tập Toán</strong> và <strong>1 đề Tiếng Anh</strong> cần ôn luyện. Hãy tiếp tục phát huy tinh thần tự học nhé!
+                    </p>
+                    <div style="margin-bottom: 20px;">
+                        <a href="profile.html" class="btn btn-sm btn-secondary" style="display:inline-flex; align-items:center; gap:6px;">
+                            <i class="fa-solid fa-user-graduate"></i> Xem Hồ Sơ & Bảng Thành Tích Cá Nhân
+                        </a>
+                    </div>
+                    <div class="welcome-quick-stats">
+                        <div class="w-stat">
+                            <span class="w-num">9.2</span>
+                            <span class="w-lbl">Điểm TB học kỳ</span>
+                        </div>
+                        <div class="w-divider"></div>
+                        <div class="w-stat">
+                            <span class="w-num">18</span>
+                            <span class="w-lbl">Đề thi đã làm</span>
+                        </div>
+                        <div class="w-divider"></div>
+                        <div class="w-stat">
+                            <span class="w-num">42h</span>
+                            <span class="w-lbl">Thời gian tự học</span>
+                        </div>
+                        <div class="w-divider"></div>
+                        <div class="w-stat">
+                            <span class="w-num">#03</span>
+                            <span class="w-lbl">Xếp hạng lớp 9A1</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="welcome-badge-card">
+                    <div class="badge-trophy-icon"><i class="fa-solid fa-award"></i></div>
+                    <h3>Học Sinh Xuất Sắc Tuần</h3>
+                    <p>Hoàn thành vượt 150% chỉ tiêu luyện đề thi vào lớp 10 môn Toán & Ngữ Văn.</p>
+                    <div class="trophy-star-row">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lưới Nội Dung Chính -->
+            <div class="dash-content-grid">
+                
+                <!-- Cột trái: Tiến độ môn học & Đề thi -->
+                <div class="dash-left-col">
+                    
+                    <!-- Khối 1: Tiến độ các môn học THCS -->
+                    <div class="dash-card">
+                        <div class="dash-card-header">
+                            <h3><i class="fa-solid fa-chart-line text-primary"></i> Tiến Độ Các Môn Học Lớp 9</h3>
+                            <a href="index.html#mon-hoc" class="link-more">Xem kho bài giảng <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                        <div class="student-subject-progress-list">
+                            
+                            <!-- Toán -->
+                            <div class="subj-progress-item">
+                                <div class="subj-info">
+                                    <div class="subj-icon bg-blue"><i class="fa-solid fa-calculator"></i></div>
+                                    <div>
+                                        <strong>Toán Học (Đại Số & Hình Học)</strong>
+                                        <span>Đã học: 42/50 bài • Hoàn thành 84%</span>
+                                    </div>
+                                </div>
+                                <div class="subj-progress-bar">
+                                    <div class="progress-fill bg-blue" style="width: 84%;"></div>
+                                </div>
+                            </div>
+
+                            <!-- Tiếng Anh -->
+                            <div class="subj-progress-item">
+                                <div class="subj-info">
+                                    <div class="subj-icon bg-green"><i class="fa-solid fa-globe"></i></div>
+                                    <div>
+                                        <strong>Tiếng Anh (Global Success)</strong>
+                                        <span>Đã học: 32/40 bài • Hoàn thành 80%</span>
+                                    </div>
+                                </div>
+                                <div class="subj-progress-bar">
+                                    <div class="progress-fill bg-green" style="width: 80%;"></div>
+                                </div>
+                            </div>
+
+                            <!-- Ngữ Văn -->
+                            <div class="subj-progress-item">
+                                <div class="subj-info">
+                                    <div class="subj-icon bg-orange"><i class="fa-solid fa-book-bookmark"></i></div>
+                                    <div>
+                                        <strong>Ngữ Văn (Soạn bài & Văn mẫu)</strong>
+                                        <span>Đã học: 28/38 bài • Hoàn thành 73%</span>
+                                    </div>
+                                </div>
+                                <div class="subj-progress-bar">
+                                    <div class="progress-fill bg-orange" style="width: 73%;"></div>
+                                </div>
+                            </div>
+
+                            <!-- KHTN -->
+                            <div class="subj-progress-item">
+                                <div class="subj-info">
+                                    <div class="subj-icon bg-purple"><i class="fa-solid fa-flask-vial"></i></div>
+                                    <div>
+                                        <strong>Khoa Học Tự Nhiên (Lý - Hóa - Sinh)</strong>
+                                        <span>Đã học: 35/45 bài • Hoàn thành 78%</span>
+                                    </div>
+                                </div>
+                                <div class="subj-progress-bar">
+                                    <div class="progress-fill bg-purple" style="width: 78%;"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Khối 2: Kết quả các bài kiểm tra gần đây -->
+                    <div class="dash-card">
+                        <div class="dash-card-header">
+                            <h3><i class="fa-solid fa-file-signature text-green"></i> Lịch Sử Luyện Đề & Điểm Số</h3>
+                            <a href="exam.html" class="link-more"><i class="fa-solid fa-bolt"></i> Vào phòng thi Thứ 2 <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="exam-result-table">
+                                <thead>
+                                    <tr>
+                                        <th>Tên Đề Kiểm Tra</th>
+                                        <th>Môn Học</th>
+                                        <th>Thời Gian Làm</th>
+                                        <th>Điểm Số</th>
+                                        <th>Trạng Thái</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Đề Thi Giữa Kỳ 1 Môn Toán 9</strong></td>
+                                        <td>Toán Học</td>
+                                        <td>45 phút</td>
+                                        <td><span class="score-badge score-high">9.5 / 10</span></td>
+                                        <td><span class="status-pass">Đạt Giỏi</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Đề Kiểm Tra Tiếng Anh 9 Unit 4</strong></td>
+                                        <td>Tiếng Anh</td>
+                                        <td>30 phút</td>
+                                        <td><span class="score-badge score-high">9.0 / 10</span></td>
+                                        <td><span class="status-pass">Đạt Giỏi</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Trắc Nghiệm Hóa Học 8 Phản Ứng</strong></td>
+                                        <td>KHTN</td>
+                                        <td>20 phút</td>
+                                        <td><span class="score-badge score-mid">8.5 / 10</span></td>
+                                        <td><span class="status-pass">Đạt Khá</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Cột phải: Mục tiêu & Thời khóa biểu -->
+                <div class="dash-right-col">
+                    
+                    <!-- Nhiệm vụ học tập hôm nay -->
+                    <div class="dash-card">
+                        <div class="dash-card-header">
+                            <h3><i class="fa-solid fa-list-check text-primary"></i> Nhiệm Vụ Hôm Nay</h3>
+                        </div>
+                        <ul class="task-todo-list">
+                            <li class="task-todo-item completed">
+                                <i class="fa-solid fa-circle-check"></i>
+                                <span>Ôn lại 7 hằng đẳng thức đáng nhớ (Toán 8)</span>
+                            </li>
+                            <li class="task-todo-item completed">
+                                <i class="fa-solid fa-circle-check"></i>
+                                <span>Học 15 từ vựng Tiếng Anh Unit 5</span>
+                            </li>
+                            <li class="task-todo-item">
+                                <i class="fa-regular fa-circle"></i>
+                                <span>Làm 1 bài văn phân tích nhân vật Vũ Nương</span>
+                            </li>
+                            <li class="task-todo-item">
+                                <i class="fa-regular fa-circle"></i>
+                                <span>Giải đề thi thử Toán tuyển sinh vào 10 (Sở GD Hà Nội)</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Lời khuyên ôn tập hôm nay -->
+                    <div class="dash-card card-advice">
+                        <div class="advice-icon"><i class="fa-solid fa-lightbulb"></i></div>
+                        <h4>Mẹo Ôn Thi Vào 10 Hôm Nay</h4>
+                        <p>"Khi làm bài thi môn Toán, hãy luôn kiểm tra điều kiện xác định (ĐKXĐ) của biểu thức chứa căn hoặc mẫu số trước khi bắt tay rút gọn để không bị mất điểm 0.25 - 0.5 oan uổng!"</p>
+                    </div>
+
+                    <!-- Hotline hỗ trợ bài tập khó -->
+                    <div class="dash-card card-support">
+                        <div class="sup-icon"><i class="fa-solid fa-headset"></i></div>
+                        <h4>Gặp Bài Tập Khó?</h4>
+                        <p>Gửi câu hỏi ngay cho Trợ Lý Học Tập hoặc Thầy Cô phụ trách.</p>
+                        <a href="index.html#hoi-dap-ai" class="btn btn-sm btn-primary btn-block">
+                            <i class="fa-solid fa-paper-plane"></i> Đặt Câu Hỏi Ngay
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Chân trang cá nhân -->
+    <footer class="dash-footer">
+        <div class="container dash-footer-inner">
+            <p>&copy; 2026 EduTHCS. Nền tảng học tập Cấp 2 toàn diện. Chúc bạn học tập thật tốt!</p>
+            <div class="footer-links">
+                <a href="index.html">Trang chủ</a>
+                <span class="dot">•</span>
+                <a href="profile.html">Trang cá nhân</a>
+                <span class="dot">•</span>
+                <a href="index.html#mon-hoc">Môn học</a>
+                <span class="dot">•</span>
+                <a href="index.html#de-thi">Kho đề thi</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script File -->
+    <script src="auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loggedUser = JSON.parse(localStorage.getItem('eduthcs_user') || 'null');
+            if (loggedUser) {
+                const nameDisplay = document.getElementById('displayStudentName');
+                const roleDisplay = document.getElementById('displayStudentRole');
+                const greeting = document.getElementById('welcomeNameGreeting');
+                
+                if (nameDisplay) nameDisplay.innerText = loggedUser.fullName || loggedUser.username;
+                if (roleDisplay) roleDisplay.innerText = loggedUser.roleName || 'Học Sinh Cấp 2';
+                if (greeting) greeting.innerText = loggedUser.fullName || loggedUser.username;
+            }
+        });
+
+        function handleUserLogout() {
+            if (confirm('Bạn có muốn đăng xuất khỏi tài khoản không?')) {
+                localStorage.removeItem('eduthcs_user');
+                window.location.href = 'login.html';
+            }
+        }
+    </script>
+</body>
+</html>

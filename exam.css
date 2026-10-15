@@ -1,0 +1,1913 @@
+/* ==========================================================
+   CSS DÀNH RIÊNG CHO PHÒNG THI TRỰC TUYẾN (EXAM PORTAL)
+   ========================================================== */
+
+.exam-body {
+    background: #f1f5f9;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: var(--text-heading);
+}
+
+/* ================= HEADER PHÒNG THI ================= */
+.exam-header {
+    background: #ffffff;
+    border-bottom: 2px solid var(--border-color);
+    padding: 12px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-sm);
+}
+
+.exam-header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.exam-header-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Nút chuyển chế độ thử nghiệm (Simulate Mode Toggle) */
+.test-mode-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #eff6ff;
+    border: 1px dashed #3b82f6;
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+}
+
+.mode-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #1e40af;
+}
+
+.btn-toggle-mode {
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+    background: #2563eb;
+    color: #ffffff;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-toggle-mode:hover {
+    background: #1d4ed8;
+}
+
+.student-exam-pill {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f8fafc;
+    border: 1.5px solid var(--border-color);
+    padding: 5px 14px;
+    border-radius: var(--radius-full);
+}
+
+.candidate-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+}
+
+.candidate-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.candidate-info strong {
+    font-size: 0.85rem;
+    color: var(--text-heading);
+    line-height: 1.2;
+}
+
+.candidate-info span {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+}
+
+.back-home-btn {
+    border-radius: var(--radius-full);
+}
+
+/* ================= MAIN CONTAINER ================= */
+.exam-main-container {
+    flex: 1;
+    padding: 30px 0 50px 0;
+}
+
+.exam-state-screen {
+    animation: fadeIn 0.35s ease;
+}
+
+.d-none {
+    display: none !important;
+}
+
+/* ==================================================== */
+/* 1. MÀN HÌNH CHỜ ĐẾM NGƯỢC (WAITING SCREEN)          */
+/* ==================================================== */
+.waiting-card {
+    background: #ffffff;
+    border-radius: 28px;
+    padding: 50px 45px;
+    max-width: 900px;
+    margin: 0 auto;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.waiting-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 18px;
+    background: #fee2e2;
+    color: #b91c1c;
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    border-radius: var(--radius-full);
+    margin-bottom: 20px;
+}
+
+.waiting-title {
+    font-family: var(--font-heading);
+    font-size: 2.3rem;
+    font-weight: 800;
+    color: var(--text-heading);
+    line-height: 1.3;
+    margin-bottom: 16px;
+}
+
+.waiting-desc {
+    font-size: 1.05rem;
+    color: var(--text-body);
+    max-width: 720px;
+    margin: 0 auto 35px auto;
+    line-height: 1.7;
+}
+
+/* Đồng hồ đếm ngược lớn */
+.countdown-clock-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.countdown-box {
+    background: linear-gradient(145deg, #0f172a, #1e293b);
+    color: #ffffff;
+    border-radius: 18px;
+    padding: 16px 20px;
+    min-width: 100px;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.count-value {
+    font-family: var(--font-heading);
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: #38bdf8;
+    line-height: 1;
+}
+
+.count-label {
+    font-size: 0.78rem;
+    color: #94a3b8;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-top: 6px;
+    letter-spacing: 0.06em;
+}
+
+.count-colon {
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: #94a3b8;
+}
+
+.target-time-notice {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.target-time-notice strong {
+    color: var(--primary);
+}
+
+/* Khung quy chế thi */
+.exam-rules-box {
+    background: #f8fafc;
+    border: 1.5px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 26px 30px;
+    text-align: left;
+    margin-bottom: 35px;
+}
+
+.rules-heading {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--text-heading);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rules-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.rules-list li {
+    font-size: 0.92rem;
+    color: var(--text-body);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    line-height: 1.6;
+}
+
+.rules-list li i {
+    font-size: 1.1rem;
+    margin-top: 3px;
+    flex-shrink: 0;
+}
+
+.rule-strict {
+    background: #fff1f2;
+    padding: 12px 16px;
+    border-radius: var(--radius-md);
+    border-left: 4px solid #ef4444;
+}
+
+.rule-strict strong {
+    color: #b91c1c;
+}
+
+.text-danger { color: #ef4444; }
+.text-warning { color: #f59e0b; }
+.text-success { color: #10b981; }
+
+.waiting-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn-disabled {
+    background: #e2e8f0;
+    color: #94a3b8;
+    cursor: not-allowed;
+    border: 1px solid #cbd5e1;
+}
+
+/* ==================================================== */
+/* 2. MÀN HÌNH LÀM BÀI THI (EXAM ROOM)                  */
+/* ==================================================== */
+.exam-room-layout {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 25px;
+    align-items: flex-start;
+}
+
+.exam-content-area {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.exam-room-header {
+    background: #ffffff;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    padding: 24px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    box-shadow: var(--shadow-sm);
+}
+
+.exam-paper-title {
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--text-heading);
+    margin: 6px 0;
+}
+
+.exam-paper-info {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.timer-display-card {
+    background: linear-gradient(135deg, #1e3a8a, #2563eb);
+    color: #ffffff;
+    padding: 14px 22px;
+    border-radius: var(--radius-md);
+    text-align: center;
+    min-width: 170px;
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+    transition: var(--transition);
+}
+
+.timer-display-card.timer-warning {
+    background: linear-gradient(135deg, #b45309, #f59e0b);
+    box-shadow: 0 8px 20px rgba(245, 158, 11, 0.4);
+}
+
+.timer-display-card.timer-danger {
+    background: linear-gradient(135deg, #991b1b, #ef4444);
+    box-shadow: 0 8px 20px rgba(239, 68, 68, 0.5);
+    animation: pulse 1.5s infinite;
+}
+
+.timer-label {
+    display: block;
+    font-size: 0.75rem;
+    color: #bfdbfe;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.timer-countdown {
+    font-family: var(--font-heading);
+    font-size: 1.9rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    line-height: 1.1;
+}
+
+/* Banner nhắc nhở 1 lần thi */
+.warning-banner-bar {
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    border-left: 4px solid #f59e0b;
+    padding: 10px 18px;
+    border-radius: var(--radius-md);
+    font-size: 0.85rem;
+    color: #92400e;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Thẻ giấy thi câu hỏi */
+.question-paper-card {
+    background: #ffffff;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    padding: 35px 40px;
+    box-shadow: var(--shadow-sm);
+    min-height: 480px;
+    display: flex;
+    flex-direction: column;
+}
+
+.question-meta-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.question-number-badge {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--primary);
+    background: #eff6ff;
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+}
+
+.question-subject-badge {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #059669;
+    background: #d1fae5;
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+}
+
+.btn-flag-question {
+    margin-left: auto;
+    font-size: 0.85rem;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+}
+
+.btn-flag-question.flagged {
+    color: #d97706;
+    background: #fef3c7;
+    border-color: #fde68a;
+}
+
+.question-text {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-heading);
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+/* Các đáp án trắc nghiệm */
+.answers-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 35px;
+    flex-grow: 1;
+}
+
+.answer-option {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 20px;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: var(--transition);
+    user-select: none;
+    background: #ffffff;
+}
+
+.answer-option:hover {
+    border-color: #93c5fd;
+    background: #f8fafc;
+}
+
+.answer-option.selected {
+    border-color: var(--primary);
+    background: #eff6ff;
+}
+
+.opt-letter {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 2px solid #cbd5e1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.95rem;
+    color: #475569;
+    flex-shrink: 0;
+    transition: var(--transition);
+}
+
+.answer-option.selected .opt-letter {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #ffffff;
+}
+
+.opt-text {
+    font-size: 1rem;
+    color: var(--text-body);
+    font-weight: 500;
+}
+
+.answer-option.selected .opt-text {
+    color: #1e3a8a;
+    font-weight: 600;
+}
+
+/* Nút chuyển câu hỏi */
+.question-nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    border-top: 1px solid #f1f5f9;
+}
+
+.nav-question-indicator {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-muted);
+}
+
+/* ================= SIDEBAR BẢNG CÂU HỎI ================= */
+.exam-sidebar-palette {
+    position: sticky;
+    top: 90px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.palette-card {
+    background: #ffffff;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+}
+
+.palette-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.palette-header h3 {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--text-heading);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.answered-ratio {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--primary);
+    background: #eff6ff;
+    padding: 3px 8px;
+    border-radius: var(--radius-full);
+}
+
+.palette-legend {
+    display: flex;
+    gap: 12px;
+    font-size: 0.74rem;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.dot-answered { background: #10b981; }
+.dot-flagged { background: #f59e0b; }
+.dot-empty { background: #e2e8f0; }
+
+/* Grid 15 ô số câu */
+.question-palette-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.palette-btn {
+    height: 42px;
+    border-radius: 10px;
+    border: 1.5px solid var(--border-color);
+    background: #f8fafc;
+    color: var(--text-heading);
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+}
+
+.palette-btn:hover {
+    border-color: var(--primary);
+    background: #ffffff;
+}
+
+.palette-btn.current {
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.palette-btn.answered {
+    background: #10b981;
+    color: #ffffff;
+    border-color: #10b981;
+}
+
+.palette-btn.flagged::after {
+    content: '';
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #f59e0b;
+}
+
+/* Nộp bài */
+.submit-action-box {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    color: #ffffff;
+    box-shadow: 0 6px 18px rgba(220, 38, 38, 0.35);
+}
+
+.btn-danger:hover {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: #ffffff;
+}
+
+.btn-submit-exam {
+    width: 100%;
+    padding: 14px;
+    font-size: 1.05rem;
+    font-weight: 800;
+    border-radius: var(--radius-md);
+}
+
+.submit-hint-text {
+    font-size: 0.74rem;
+    color: #94a3b8;
+}
+
+/* Sidebar Candidate Info */
+.candidate-card-sidebar .candidate-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.candidate-card-sidebar .c-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #2563eb;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+}
+
+.candidate-card-sidebar strong {
+    display: block;
+    font-size: 0.9rem;
+}
+
+.candidate-card-sidebar span {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+}
+
+.exam-rules-mini p {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* ==================================================== */
+/* 3. MÀN HÌNH KHÓA BÀI THI (LOCKED / ĐÃ THI KHÔNG THI LẠI) */
+/* ==================================================== */
+.locked-card {
+    background: #ffffff;
+    border-radius: 28px;
+    padding: 45px 50px;
+    max-width: 920px;
+    margin: 0 auto;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.locked-icon-badge {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #dcfce7;
+    color: #10b981;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.8rem;
+    margin: 0 auto 16px auto;
+    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.25);
+    animation: bounce 0.8s ease;
+}
+
+.locked-status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 18px;
+    background: #fee2e2;
+    color: #b91c1c;
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    border-radius: var(--radius-full);
+    margin-bottom: 14px;
+}
+
+.locked-title {
+    font-family: var(--font-heading);
+    font-size: 2.1rem;
+    font-weight: 800;
+    color: var(--text-heading);
+    margin-bottom: 18px;
+}
+
+/* Cảnh báo nghiêm cấm thi lại */
+.strict-lock-notice {
+    background: #fef2f2;
+    border: 1.5px solid #fecaca;
+    border-radius: var(--radius-md);
+    padding: 16px 22px;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.strict-lock-notice i {
+    font-size: 1.6rem;
+    margin-top: 2px;
+}
+
+.strict-lock-notice strong {
+    display: block;
+    font-size: 0.95rem;
+    color: #991b1b;
+    margin-bottom: 4px;
+}
+
+.strict-lock-notice p {
+    font-size: 0.85rem;
+    color: #7f1d1d;
+    margin-bottom: 0;
+    line-height: 1.5;
+}
+
+/* 4 Khối kết quả */
+.result-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 30px;
+}
+
+.result-box {
+    background: #f8fafc;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 20px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.res-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+}
+
+.res-val {
+    font-family: var(--font-heading);
+    font-size: 2.1rem;
+    font-weight: 800;
+    color: var(--text-heading);
+    line-height: 1.1;
+    margin-bottom: 4px;
+}
+
+.box-score .res-val { color: var(--primary); font-size: 2.5rem; }
+.text-gold { color: #d97706; }
+.res-sub {
+    font-size: 0.72rem;
+    color: #94a3b8;
+}
+
+/* Bảng chi tiết lần nộp */
+.submission-details-table {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 18px 24px;
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.s-detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 0.88rem;
+    border-bottom: 1px dashed #f1f5f9;
+}
+
+.s-detail-row:last-child {
+    border-bottom: none;
+}
+
+.s-detail-row span {
+    color: var(--text-muted);
+}
+
+.tag-locked {
+    background: #fee2e2;
+    color: #b91c1c;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.locked-actions-row {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+/* Khu vực xem lại đáp án */
+.review-answers-section {
+    border-top: 2px dashed var(--border-color);
+    padding-top: 30px;
+    text-align: left;
+    animation: fadeIn 0.3s ease;
+}
+
+.review-section-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--text-heading);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.review-item-card {
+    background: #f8fafc;
+    border: 1.5px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 20px 24px;
+    margin-bottom: 18px;
+}
+
+.review-item-card.is-correct {
+    border-left: 5px solid #10b981;
+}
+
+.review-item-card.is-incorrect {
+    border-left: 5px solid #ef4444;
+}
+
+.review-q-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.review-q-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-heading);
+    margin-bottom: 14px;
+}
+
+.review-answers-compare {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 0.88rem;
+    margin-bottom: 12px;
+}
+
+.review-explanation {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    color: #334155;
+    line-height: 1.6;
+}
+
+.review-explanation strong {
+    color: #0284c7;
+}
+
+/* Helper Reset cho Admin / Thầy cô */
+.admin-reset-helper {
+    background: #f1f5f9;
+    border-radius: var(--radius-md);
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 25px;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.admin-hint-text {
+    font-size: 0.78rem;
+    color: #64748b;
+}
+
+.btn-admin-reset {
+    font-size: 0.76rem;
+    font-weight: 700;
+    color: #dc2626;
+    background: #ffffff;
+    border: 1px solid #fca5a5;
+    padding: 4px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-admin-reset:hover {
+    background: #fee2e2;
+}
+
+/* ================= MODAL XÁC NHẬN NỘP BÀI ================= */
+.modal-confirm-box {
+    text-align: center;
+    max-width: 500px;
+    padding: 35px 30px;
+}
+
+.modal-confirm-icon {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: #fee2e2;
+    color: #dc2626;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin: 0 auto 15px auto;
+}
+
+.modal-confirm-box h2 {
+    font-size: 1.45rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+.confirm-stat-pill {
+    display: inline-block;
+    padding: 6px 16px;
+    background: #eff6ff;
+    color: #1e40af;
+    border-radius: var(--radius-full);
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+}
+
+.confirm-warning-text {
+    font-size: 0.88rem;
+    color: #b91c1c;
+    background: #fef2f2;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+.modal-confirm-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+/* ========================================================== */
+/* BẢNG XẾP HẠNG THI ĐUA (LEADERBOARD STYLES)                 */
+/* ========================================================== */
+.btn-warning {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: #ffffff;
+    border: none;
+    box-shadow: 0 6px 18px rgba(217, 119, 6, 0.35);
+}
+
+.btn-warning:hover {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    color: #ffffff;
+}
+
+.exam-leaderboard-section {
+    border-top: 2px dashed var(--border-color);
+    padding-top: 35px;
+    margin-top: 35px;
+    text-align: left;
+    animation: fadeIn 0.4s ease;
+}
+
+.leaderboard-header-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    background: linear-gradient(135deg, #eff6ff 0%, #fdf2f8 100%);
+    border: 1px solid #bfdbfe;
+    padding: 22px 28px;
+    border-radius: var(--radius-lg);
+    margin-bottom: 25px;
+    box-shadow: var(--shadow-sm);
+}
+
+.lb-top-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    background: #fef3c7;
+    color: #b45309;
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    border-radius: var(--radius-full);
+    margin-bottom: 6px;
+    border: 1px solid #fde68a;
+}
+
+.lb-title {
+    font-family: var(--font-heading);
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: #1e3a8a;
+    margin-bottom: 4px;
+}
+
+.lb-subtitle {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin-bottom: 0;
+}
+
+.lb-header-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.btn-share-rank {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #ffffff;
+    border: none;
+    padding: 7px 16px;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    font-size: 0.82rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-share-rank:hover {
+    background: linear-gradient(135deg, #1d4ed8, #1e40af);
+}
+
+.btn-refresh-rank {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border-color);
+    background: #ffffff;
+    color: var(--text-muted);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-refresh-rank:hover {
+    color: var(--primary);
+    border-color: var(--primary);
+    transform: rotate(180deg);
+}
+
+/* Thẻ vị trí cá nhân của thí sinh */
+.my-rank-card {
+    background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 55%, #3b82f6 100%);
+    color: #ffffff;
+    border-radius: var(--radius-lg);
+    padding: 22px 28px;
+    margin-bottom: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.28);
+    position: relative;
+    overflow: hidden;
+}
+
+.my-rank-card::after {
+    content: '';
+    position: absolute;
+    right: -40px;
+    top: -40px;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    pointer-events: none;
+}
+
+.my-rank-left {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.my-rank-avatar {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: #ffffff;
+    color: #2563eb;
+    font-size: 1.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    border: 3px solid rgba(255, 255, 255, 0.85);
+    flex-shrink: 0;
+}
+
+.my-rank-badge {
+    background: rgba(255, 255, 255, 0.22);
+    padding: 3px 10px;
+    border-radius: var(--radius-full);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #dbeafe;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 4px;
+}
+
+.my-rank-name {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 2px 0 6px 0;
+}
+
+.my-rank-stats {
+    display: flex;
+    gap: 16px;
+    font-size: 0.84rem;
+    color: #e0e7ff;
+    flex-wrap: wrap;
+}
+
+.my-rank-stats span {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.my-rank-stats strong {
+    color: #ffffff;
+}
+
+.my-rank-right {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.16);
+    backdrop-filter: blur(10px);
+    padding: 12px 22px;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    min-width: 175px;
+    flex-shrink: 0;
+}
+
+.rank-pos-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+    color: #bfdbfe;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.rank-pos-number {
+    font-family: var(--font-heading);
+    font-size: 2.3rem;
+    font-weight: 800;
+    color: #fde047;
+    line-height: 1.1;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.rank-pos-tier {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #ffffff;
+    display: block;
+    margin-top: 3px;
+}
+
+/* Podium Top 3 */
+.podium-section {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.podium-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #1e293b;
+    letter-spacing: 0.04em;
+    margin-bottom: 22px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.podium-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    align-items: flex-end;
+    max-width: 820px;
+    margin: 0 auto;
+}
+
+.podium-card {
+    background: #ffffff;
+    border-radius: var(--radius-lg);
+    border: 2px solid var(--border-color);
+    padding: 24px 14px 18px 14px;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    transition: var(--transition);
+}
+
+.podium-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.podium-rank-1 {
+    order: 2;
+    border-color: #f59e0b;
+    background: linear-gradient(180deg, #fffbeb 0%, #ffffff 100%);
+    box-shadow: 0 12px 28px rgba(245, 158, 11, 0.25);
+    transform: translateY(-12px);
+    padding-top: 30px;
+}
+
+.podium-rank-1:hover {
+    transform: translateY(-16px);
+}
+
+.podium-rank-2 {
+    order: 1;
+    border-color: #94a3b8;
+    background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+}
+
+.podium-rank-3 {
+    order: 3;
+    border-color: #d97706;
+    background: linear-gradient(180deg, #fff7ed 0%, #ffffff 100%);
+}
+
+.podium-crown {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.8rem;
+    color: #f59e0b;
+    filter: drop-shadow(0 2px 6px rgba(245, 158, 11, 0.45));
+    animation: bounce 1.8s infinite;
+}
+
+.podium-avatar-wrap {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    margin: 0 auto 10px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.15rem;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 3px solid #ffffff;
+}
+
+.podium-rank-1 .podium-avatar-wrap {
+    width: 68px;
+    height: 68px;
+    font-size: 1.35rem;
+    border-color: #fde68a;
+}
+
+.podium-medal-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: var(--radius-full);
+    font-size: 0.72rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.badge-gold {
+    background: #fef3c7;
+    color: #b45309;
+    border: 1px solid #fde68a;
+}
+
+.badge-silver {
+    background: #f1f5f9;
+    color: #475569;
+    border: 1px solid #cbd5e1;
+}
+
+.badge-bronze {
+    background: #ffedd5;
+    color: #9a3412;
+    border: 1px solid #fed7aa;
+}
+
+.podium-name {
+    font-size: 0.96rem;
+    font-weight: 800;
+    color: var(--text-heading);
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.podium-school {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.podium-score-pill {
+    background: #eff6ff;
+    color: #2563eb;
+    font-weight: 800;
+    font-size: 1.05rem;
+    padding: 4px 14px;
+    border-radius: var(--radius-full);
+    display: inline-block;
+    margin-bottom: 4px;
+}
+
+.podium-rank-1 .podium-score-pill {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+.podium-time {
+    font-size: 0.73rem;
+    color: #64748b;
+    display: block;
+}
+
+/* Bộ lọc & Tìm kiếm */
+.lb-filter-panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+}
+
+.lb-search-input-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #ffffff;
+    border: 1.5px solid var(--border-color);
+    border-radius: var(--radius-full);
+    padding: 8px 16px;
+    flex: 1;
+    min-width: 260px;
+    box-shadow: var(--shadow-sm);
+}
+
+.lb-search-input-wrap i {
+    color: #94a3b8;
+}
+
+.lb-search-input-wrap input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 0.88rem;
+    background: transparent;
+    font-family: var(--font-body);
+}
+
+.lb-grade-tabs {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.btn-grade-tab {
+    padding: 6px 14px;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--border-color);
+    background: #ffffff;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-grade-tab.active,
+.btn-grade-tab:hover {
+    background: var(--primary);
+    color: #ffffff;
+    border-color: var(--primary);
+}
+
+/* Bảng Danh Sách */
+.leaderboard-table-card {
+    background: #ffffff;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+}
+
+.lb-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.lb-table th {
+    background: #f8fafc;
+    padding: 13px 16px;
+    font-size: 0.78rem;
+    font-weight: 800;
+    color: #475569;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.lb-table td {
+    padding: 12px 16px;
+    font-size: 0.87rem;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: middle;
+}
+
+.lb-table tr.is-current-user {
+    background: linear-gradient(90deg, #eff6ff 0%, #fdf2f8 100%) !important;
+    border-left: 4px solid #2563eb;
+    font-weight: 600;
+}
+
+.lb-table tr:hover {
+    background: #f8fafc;
+}
+
+.rank-col-badge {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.88rem;
+}
+
+.rank-1-badge {
+    background: #fef3c7;
+    color: #b45309;
+    border: 1.5px solid #f59e0b;
+}
+
+.rank-2-badge {
+    background: #f1f5f9;
+    color: #475569;
+    border: 1.5px solid #94a3b8;
+}
+
+.rank-3-badge {
+    background: #ffedd5;
+    color: #9a3412;
+    border: 1.5px solid #d97706;
+}
+
+.rank-other-badge {
+    background: #f1f5f9;
+    color: #64748b;
+    font-size: 0.82rem;
+}
+
+.student-cell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.student-cell-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+}
+
+.student-name-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.student-name-box strong {
+    color: var(--text-heading);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.tag-you {
+    background: #2563eb;
+    color: #ffffff;
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 1px 6px;
+    border-radius: 4px;
+    letter-spacing: 0.05em;
+}
+
+.student-name-box span {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+}
+
+.score-pill {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 0.95rem;
+    color: #2563eb;
+    background: #eff6ff;
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+    display: inline-block;
+}
+
+.score-10 {
+    color: #b45309;
+    background: #fef3c7;
+}
+
+.title-pill {
+    font-size: 0.74rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: var(--radius-full);
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.lb-table-footer {
+    padding: 14px 20px;
+    background: #f8fafc;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+}
+
+.btn-toggle-all-lb {
+    background: none;
+    border: none;
+    color: var(--primary);
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+    transition: var(--transition);
+}
+
+.btn-toggle-all-lb:hover {
+    color: #1d4ed8;
+}
+
+/* Modal Khoe Thành Tích (Certificate / Share) */
+.modal-share-box {
+    max-width: 480px;
+    text-align: center;
+    position: relative;
+    padding: 35px 25px 25px 25px;
+}
+
+.btn-close-modal {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: #f1f5f9;
+    color: #64748b;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.btn-close-modal:hover {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.cert-card-preview {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #312e81 100%);
+    color: #ffffff;
+    border-radius: 20px;
+    padding: 32px 24px;
+    margin-bottom: 22px;
+    border: 2px solid #fde047;
+    box-shadow: 0 12px 30px rgba(30, 58, 138, 0.35);
+    text-align: center;
+}
+
+.cert-crown {
+    font-size: 2.2rem;
+    color: #fde047;
+    margin-bottom: 6px;
+    filter: drop-shadow(0 2px 8px rgba(253, 224, 71, 0.5));
+}
+
+.cert-sub {
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: #bfdbfe;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.cert-title {
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 16px;
+}
+
+.cert-for {
+    font-size: 0.78rem;
+    color: #cbd5e1;
+    margin-bottom: 2px;
+}
+
+.cert-name {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #fde047;
+    margin-bottom: 4px;
+}
+
+.cert-school {
+    font-size: 0.82rem;
+    color: #e2e8f0;
+    margin-bottom: 20px;
+}
+
+.cert-score-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-md);
+    padding: 12px 8px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.cert-stat span {
+    display: block;
+    font-size: 0.7rem;
+    color: #bfdbfe;
+    margin-bottom: 2px;
+}
+
+.cert-stat strong {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.cert-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.7rem;
+    color: #94a3b8;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-top: 10px;
+}
+
+.cert-footer code {
+    color: #fde047;
+    background: rgba(0, 0, 0, 0.25);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.share-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 992px) {
+    .exam-room-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .exam-sidebar-palette {
+        position: static;
+    }
+
+    .result-summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .podium-grid {
+        grid-template-columns: 1fr;
+        max-width: 360px;
+    }
+
+    .podium-rank-1 {
+        order: 1;
+        transform: none;
+    }
+
+    .podium-rank-2 {
+        order: 2;
+    }
+
+    .podium-rank-3 {
+        order: 3;
+    }
+}
+
+@media (max-width: 600px) {
+    .waiting-card,
+    .locked-card {
+        padding: 30px 18px;
+    }
+
+    .countdown-box {
+        min-width: 70px;
+        padding: 10px 8px;
+    }
+
+    .count-value {
+        font-size: 2rem;
+    }
+
+    .question-paper-card {
+        padding: 24px 18px;
+    }
+
+    .exam-room-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .timer-display-card {
+        width: 100%;
+    }
+
+    .result-summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .my-rank-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .my-rank-left {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .my-rank-stats {
+        justify-content: center;
+    }
+
+    .my-rank-right {
+        width: 100%;
+    }
+
+    .leaderboard-header-banner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+

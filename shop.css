@@ -1,0 +1,839 @@
+/* ==========================================================
+   EDUTHCS - CSS MỤC GIẢM GIÁ, MUA ĐỀ THI, MUA KHÓA HỌC
+   VÀ ĐẶC QUYỀN THI LẠI TRONG KHÓA HỌC (SHOP & RETAKE PRIVILEGES)
+   ========================================================== */
+
+/* Flash Sale Countdown Banner */
+.promo-flashsale-banner {
+    background: linear-gradient(135deg, #7f1d1d 0%, #dc2626 40%, #ea580c 100%);
+    color: #ffffff;
+    border-radius: var(--radius-lg);
+    padding: 24px 30px;
+    margin-bottom: 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 10px 30px rgba(220, 38, 38, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.promo-flashsale-banner::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -20%;
+    width: 60%;
+    height: 200%;
+    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0) 100%);
+    transform: rotate(25deg);
+    animation: flashShine 4s infinite;
+}
+
+@keyframes flashShine {
+    0% { left: -60%; }
+    50%, 100% { left: 140%; }
+}
+
+.flash-title-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.flash-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #fef08a;
+    color: #854d0e;
+    font-size: 0.76rem;
+    font-weight: 800;
+    padding: 3px 12px;
+    border-radius: var(--radius-full);
+    width: fit-content;
+    letter-spacing: 0.05em;
+}
+
+.flash-heading {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 4px 0 2px 0;
+}
+
+.flash-desc {
+    font-size: 0.88rem;
+    color: #fed7aa;
+    margin: 0;
+}
+
+.flash-timer-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0, 0, 0, 0.35);
+    padding: 10px 18px;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    flex-shrink: 0;
+}
+
+.timer-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 42px;
+}
+
+.timer-unit .t-val {
+    font-family: var(--font-heading);
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: #fef08a;
+    line-height: 1.1;
+}
+
+.timer-unit .t-lbl {
+    font-size: 0.65rem;
+    color: #cbd5e1;
+    text-transform: uppercase;
+}
+
+.timer-sep {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #fef08a;
+    margin-top: -6px;
+}
+
+/* Tabs Chuyển Đổi Danh Mục */
+.shop-tabs-nav {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 35px;
+    flex-wrap: wrap;
+}
+
+.shop-tab-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 22px;
+    border-radius: var(--radius-full);
+    background: #ffffff;
+    color: var(--text-body);
+    font-size: 0.92rem;
+    font-weight: 700;
+    border: 1.5px solid var(--border-color);
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+}
+
+.shop-tab-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.shop-tab-btn.active {
+    background: var(--primary);
+    color: #ffffff;
+    border-color: var(--primary);
+    box-shadow: 0 6px 18px rgba(37, 99, 235, 0.3);
+}
+
+.shop-tab-btn .tab-badge-pill {
+    background: #ef4444;
+    color: #ffffff;
+    font-size: 0.68rem;
+    padding: 2px 7px;
+    border-radius: var(--radius-full);
+}
+
+.shop-tab-btn.active .tab-badge-pill {
+    background: #fde047;
+    color: #854d0e;
+}
+
+/* Lưới Thẻ Sản Phẩm (Cards Grid) */
+.shop-products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 26px;
+    margin-bottom: 40px;
+}
+
+.shop-card {
+    background: #ffffff;
+    border-radius: var(--radius-lg);
+    border: 1.5px solid var(--border-color);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    position: relative;
+}
+
+.shop-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 36px rgba(15, 23, 42, 0.12);
+    border-color: #93c5fd;
+}
+
+.shop-card.featured-course {
+    border: 2px solid #2563eb;
+    box-shadow: 0 10px 30px rgba(37, 99, 235, 0.15);
+}
+
+/* Header Thẻ */
+.shop-card-head {
+    padding: 24px 24px 18px 24px;
+    position: relative;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.shop-card.featured-course .shop-card-head {
+    background: linear-gradient(135deg, #eff6ff 0%, #e0e7ff 100%);
+}
+
+.discount-badge-corner {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: linear-gradient(135deg, #dc2626, #ea580c);
+    color: #ffffff;
+    font-size: 0.78rem;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+    box-shadow: 0 4px 10px rgba(220, 38, 38, 0.35);
+}
+
+.shop-card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: 14px;
+    color: #ffffff;
+}
+
+.icon-math { background: linear-gradient(135deg, #2563eb, #1d4ed8); }
+.icon-exam { background: linear-gradient(135deg, #7c3aed, #6d28d9); }
+.icon-english { background: linear-gradient(135deg, #059669, #047857); }
+.icon-science { background: linear-gradient(135deg, #ea580c, #c2410c); }
+
+.course-target-tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #2563eb;
+    background: #dbeafe;
+    padding: 3px 10px;
+    border-radius: var(--radius-full);
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+.shop-card-title {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--text-heading);
+    line-height: 1.35;
+    margin-bottom: 6px;
+}
+
+.shop-card-subtitle {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+/* ĐẶC QUYỀN THI LẠI TRONG KHÓA HỌC (SPECIAL RETAKE PRIVILEGE BANNER) */
+.retake-privilege-badge {
+    background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+    border: 1.5px dashed #f59e0b;
+    border-radius: var(--radius-md);
+    padding: 10px 14px;
+    margin: 14px 24px 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #92400e;
+    font-size: 0.82rem;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(245, 158, 11, 0.15);
+}
+
+.retake-privilege-badge i {
+    font-size: 1.15rem;
+    color: #d97706;
+    animation: bounce 1.8s infinite;
+}
+
+.retake-privilege-badge strong {
+    color: #b45309;
+}
+
+/* Thân Thẻ & Danh Sách Quyền Lợi */
+.shop-card-body {
+    padding: 18px 24px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.features-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.features-list li {
+    font-size: 0.85rem;
+    color: var(--text-body);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.features-list li i {
+    color: #10b981;
+    margin-top: 3px;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+}
+
+.features-list li.highlight-retake {
+    background: #ecfdf5;
+    padding: 6px 10px;
+    border-radius: 8px;
+    border-left: 3px solid #10b981;
+    color: #065f46;
+    font-weight: 700;
+}
+
+.features-list li.highlight-retake i {
+    color: #059669;
+}
+
+/* Giá & Nút Mua */
+.shop-card-footer {
+    padding: 18px 24px 22px 24px;
+    border-top: 1px solid #f1f5f9;
+    background: #ffffff;
+    margin-top: auto;
+}
+
+.price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.current-price {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #dc2626;
+    line-height: 1;
+}
+
+.old-price {
+    font-size: 0.95rem;
+    color: #94a3b8;
+    text-decoration: line-through;
+}
+
+.save-percent-pill {
+    margin-left: auto;
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #059669;
+    background: #d1fae5;
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
+}
+
+.shop-action-buttons {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+}
+
+.btn-buy-now {
+    width: 100%;
+    padding: 12px;
+    font-weight: 800;
+    font-size: 0.95rem;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+    transition: var(--transition);
+}
+
+.btn-buy-now:hover {
+    background: linear-gradient(135deg, #1d4ed8, #1e40af);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(37, 99, 235, 0.45);
+}
+
+.btn-buy-exam {
+    background: linear-gradient(135deg, #7c3aed, #6d28d9);
+    box-shadow: 0 4px 14px rgba(124, 58, 237, 0.35);
+}
+
+.btn-buy-exam:hover {
+    background: linear-gradient(135deg, #6d28d9, #5b21b6);
+}
+
+/* ==========================================================
+   KHỐI ĐẶC QUYỀN THI LẠI TRÊN MÀN HÌNH KẾT QUẢ THI (EXAM.HTML)
+   ========================================================== */
+.vip-retake-container {
+    margin-bottom: 28px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+/* Trường hợp 1: ĐÃ CÓ LƯỢT THI LẠI */
+.has-retake-ticket-card {
+    background: linear-gradient(135deg, #065f46 0%, #047857 50%, #059669 100%);
+    color: #ffffff;
+    padding: 24px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    border: 2px solid #34d399;
+}
+
+.retake-left-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-align: left;
+}
+
+.ticket-icon-wrap {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #ffffff;
+    color: #059669;
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    flex-shrink: 0;
+}
+
+.retake-left-info h3 {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 4px 0;
+}
+
+.retake-left-info p {
+    font-size: 0.85rem;
+    color: #a7f3d0;
+    margin: 0;
+}
+
+.btn-use-retake {
+    background: linear-gradient(135deg, #fde047, #f59e0b);
+    color: #78350f;
+    font-size: 0.95rem;
+    font-weight: 800;
+    padding: 12px 24px;
+    border-radius: var(--radius-full);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 6px 18px rgba(245, 158, 11, 0.45);
+    cursor: pointer;
+    transition: var(--transition);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.btn-use-retake:hover {
+    background: linear-gradient(135deg, #ffffff, #fde047);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(245, 158, 11, 0.55);
+}
+
+/* Trường hợp 2: CHƯA CÓ LƯỢT THI LẠI (QUẢNG BÁ KHÓA HỌC) */
+.no-retake-ticket-card {
+    background: linear-gradient(135deg, #4c1d95 0%, #6d28d9 60%, #7c3aed 100%);
+    color: #ffffff;
+    padding: 24px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    border: 2px solid #a78bfa;
+}
+
+.promo-retake-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-align: left;
+}
+
+.gift-icon-wrap {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #fde047;
+    color: #78350f;
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    flex-shrink: 0;
+    animation: pulse 1.6s infinite;
+}
+
+.promo-retake-left h3 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 4px 0;
+}
+
+.promo-retake-left p {
+    font-size: 0.85rem;
+    color: #ddd6fe;
+    margin: 0;
+}
+
+.btn-unlock-retake {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 800;
+    padding: 12px 22px;
+    border-radius: var(--radius-full);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 6px 18px rgba(217, 119, 6, 0.45);
+    cursor: pointer;
+    transition: var(--transition);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.btn-unlock-retake:hover {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    transform: translateY(-2px);
+}
+
+/* ==========================================================
+   MODAL THANH TOÁN & KÍCH HOẠT KHÓA HỌC / ĐỀ THI
+   ========================================================== */
+.modal-checkout-box {
+    max-width: 640px;
+    text-align: left;
+    padding: 30px;
+    position: relative;
+    max-height: 92vh;
+    overflow-y: auto;
+}
+
+.checkout-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1.5px solid var(--border-color);
+    padding-bottom: 16px;
+    margin-bottom: 20px;
+}
+
+.checkout-header h3 {
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #1e3a8a;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+}
+
+/* Thẻ tóm tắt gói mua */
+.checkout-item-summary {
+    background: #f8fafc;
+    border: 1.5px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 18px 20px;
+    margin-bottom: 20px;
+}
+
+.item-summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.item-title-checkout {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--text-heading);
+}
+
+.item-badge-checkout {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #2563eb;
+    background: #dbeafe;
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
+}
+
+.item-bonus-callout {
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 0.82rem;
+    color: #065f46;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+/* Coupon Box */
+.coupon-input-group {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.coupon-input-group input {
+    flex: 1;
+    padding: 10px 16px;
+    border: 1.5px solid var(--border-color);
+    border-radius: var(--radius-md);
+    font-size: 0.88rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    outline: none;
+    transition: var(--transition);
+}
+
+.coupon-input-group input:focus {
+    border-color: var(--primary);
+}
+
+.btn-apply-coupon {
+    padding: 10px 18px;
+    background: #f1f5f9;
+    color: #475569;
+    font-weight: 700;
+    font-size: 0.85rem;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-apply-coupon:hover {
+    background: #e2e8f0;
+    color: var(--text-heading);
+}
+
+/* Phương Thức Thanh Toán */
+.payment-methods-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.payment-method-item {
+    border: 1.5px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 12px 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.payment-method-item:hover,
+.payment-method-item.active {
+    border-color: var(--primary);
+    background: #eff6ff;
+}
+
+.payment-method-item i {
+    font-size: 1.3rem;
+    color: var(--primary);
+    margin-bottom: 4px;
+    display: block;
+}
+
+.payment-method-item span {
+    font-size: 0.76rem;
+    font-weight: 700;
+    color: var(--text-heading);
+}
+
+/* Mô Phỏng QR Chuyển Khoản */
+.qr-payment-preview {
+    background: #ffffff;
+    border: 1.5px dashed #bfdbfe;
+    border-radius: var(--radius-md);
+    padding: 16px;
+    text-align: center;
+    margin-bottom: 22px;
+}
+
+.qr-box-img {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 10px auto;
+    background: #f8fafc;
+    border: 2px solid #cbd5e1;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #2563eb;
+    font-size: 2.2rem;
+}
+
+.qr-box-img span {
+    font-size: 0.65rem;
+    color: #64748b;
+    font-weight: 700;
+    margin-top: 4px;
+}
+
+.qr-info-text {
+    font-size: 0.8rem;
+    color: #475569;
+    margin: 0;
+}
+
+.qr-info-text strong {
+    color: #dc2626;
+}
+
+/* Bảng tính tổng tiền */
+.checkout-pricing-table {
+    border-top: 1px solid var(--border-color);
+    padding-top: 14px;
+    margin-bottom: 20px;
+}
+
+.pricing-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.88rem;
+    padding: 4px 0;
+    color: var(--text-muted);
+}
+
+.pricing-row.total-row {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #dc2626;
+    border-top: 1.5px dashed var(--border-color);
+    padding-top: 10px;
+    margin-top: 6px;
+}
+
+.checkout-submit-btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 1.05rem;
+    font-weight: 800;
+    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #ffffff;
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.checkout-submit-btn:hover {
+    background: linear-gradient(135deg, #059669, #047857);
+    transform: translateY(-2px);
+}
+
+.nav-badge-sale {
+    background: #dc2626;
+    color: #ffffff;
+    font-size: 0.62rem;
+    font-weight: 800;
+    padding: 1px 6px;
+    border-radius: var(--radius-full);
+    margin-left: 4px;
+    vertical-align: middle;
+    animation: pulse 1.5s infinite;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .promo-flashsale-banner {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .flash-title-wrap {
+        align-items: center;
+    }
+
+    .shop-products-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .has-retake-ticket-card,
+    .no-retake-ticket-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .retake-left-info,
+    .promo-retake-left {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .payment-methods-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Nhập - EduTHCS Cổng Học Tập Cấp 2</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- CSS Styles -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css">
+</head>
+<body class="auth-body">
+
+    <!-- Toast Notification Container -->
+    <div id="toastNotification" class="toast-box"></div>
+
+    <!-- Thanh đầu trang tối giản cho trang Auth -->
+    <header class="auth-header">
+        <div class="container auth-header-inner">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-book-open-reader"></i>
+                </div>
+                <div class="logo-text">
+                    <span class="brand-name">Edu<span class="highlight">THCS</span></span>
+                    <span class="brand-slogan">Vững bước Cấp 2 - Tự tin vào 10</span>
+                </div>
+            </a>
+            <div class="auth-header-links">
+                <span>Chưa có tài khoản?</span>
+                <a href="register.html" class="btn btn-sm btn-outline">Đăng Ký Miễn Phí</a>
+                <a href="index.html" class="back-home-link"><i class="fa-solid fa-arrow-left"></i> Về Trang Chủ</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Thân trang Đăng Nhập -->
+    <main class="auth-main">
+        <div class="auth-container">
+            
+            <!-- Cột trái: Giới thiệu & Khích lệ học tập -->
+            <div class="auth-banner">
+                <div class="banner-overlay"></div>
+                <div class="banner-content">
+                    <div class="banner-tag">
+                        <i class="fa-solid fa-sparkles"></i> Không gian học tập thông minh
+                    </div>
+                    <h2>Đăng Nhập Để Tiếp Tục Lộ Trình Chinh Phục Cấp 2</h2>
+                    <p>Truy cập ngay kho 50.000+ bài giải chi tiết, đề thi thử bấm giờ có xếp hạng và nhận trợ giúp bài tập 24/7 từ EduTHCS.</p>
+                    
+                    <div class="banner-highlights">
+                        <div class="highlight-item">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span>Lưu tiến độ học tập các môn Toán, Văn, Anh, KHTN</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span>Luyện đề thi Giữa kỳ, Cuối kỳ & Tuyển sinh vào 10</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span>Được trợ lý AI gợi ý phương pháp giải tức thì</span>
+                        </div>
+                    </div>
+
+                    <div class="banner-quote">
+                        <i class="fa-solid fa-quote-left quote-icon"></i>
+                        <p class="quote-text">"Đường đi dù vạn dặm cũng bắt đầu từ những bước chân đầu tiên. Hãy chăm chỉ mỗi ngày một chút!"</p>
+                        <span class="quote-author">- Ban Cố Vấn Chuyên Môn THCS</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cột phải: Khung Form Đăng Nhập -->
+            <div class="auth-card">
+                <div class="auth-card-header">
+                    <h1 class="auth-title">Chào Mừng Bạn Trở Lại! 👋</h1>
+                    <p class="auth-desc">Vui lòng chọn vai trò và nhập thông tin để đăng nhập</p>
+                </div>
+
+                <!-- Chọn vai trò người dùng (Role Switcher) -->
+                <div class="role-switcher">
+                    <button type="button" class="role-btn active" data-role="student" onclick="switchRole('student')">
+                        <i class="fa-solid fa-user-graduate"></i> Học sinh Cấp 2
+                    </button>
+                    <button type="button" class="role-btn" data-role="parent" onclick="switchRole('parent')">
+                        <i class="fa-solid fa-users"></i> Phụ huynh
+                    </button>
+                    <button type="button" class="role-btn" data-role="teacher" onclick="switchRole('teacher')">
+                        <i class="fa-solid fa-chalkboard-user"></i> Giáo viên
+                    </button>
+                </div>
+
+                <!-- Form đăng nhập chính -->
+                <form id="loginForm" onsubmit="handleLoginSubmit(event)" novalidate>
+                    
+                    <!-- Tài khoản / Email / SĐT -->
+                    <div class="form-group">
+                        <label for="usernameInput" class="form-label">
+                            <span id="usernameLabel">Tên đăng nhập, Email hoặc Mã học sinh</span>
+                            <span class="required">*</span>
+                        </label>
+                        <div class="input-wrapper">
+                            <i class="fa-regular fa-envelope input-icon"></i>
+                            <input 
+                                type="text" 
+                                id="usernameInput" 
+                                class="form-input" 
+                                placeholder="Nhập tên đăng nhập hoặc email..."
+                                required
+                                autocomplete="username"
+                            >
+                        </div>
+                        <span class="error-msg" id="usernameError"></span>
+                    </div>
+
+                    <!-- Mật khẩu -->
+                    <div class="form-group">
+                        <div class="label-with-link">
+                            <label for="passwordInput" class="form-label">Mật khẩu <span class="required">*</span></label>
+                            <a href="forgot-password.html" class="forgot-link">Quên mật khẩu?</a>
+                        </div>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-lock input-icon"></i>
+                            <input 
+                                type="password" 
+                                id="passwordInput" 
+                                class="form-input" 
+                                placeholder="Nhập mật khẩu của bạn..." 
+                                required
+                                autocomplete="current-password"
+                            >
+                            <button type="button" class="btn-toggle-pwd" onclick="togglePasswordVisibility('passwordInput', this)" title="Ẩn/Hiện mật khẩu">
+                                <i class="fa-regular fa-eye"></i>
+                            </button>
+                        </div>
+                        <span class="error-msg" id="passwordError"></span>
+                    </div>
+
+                    <!-- Ghi nhớ đăng nhập -->
+                    <div class="form-extra">
+                        <label class="custom-checkbox">
+                            <input type="checkbox" id="rememberMeCheckbox" checked>
+                            <span class="checkmark"></span>
+                            <span class="checkbox-label">Ghi nhớ đăng nhập trên thiết bị này</span>
+                        </label>
+                    </div>
+
+                    <!-- Nút Đăng nhập -->
+                    <button type="submit" class="btn btn-lg btn-primary btn-auth-submit" id="submitLoginBtn">
+                        <span class="btn-text"><i class="fa-solid fa-right-to-bracket"></i> Đăng Nhập Ngay</span>
+                        <span class="btn-loading d-none"><i class="fa-solid fa-spinner fa-spin"></i> Đang xác thực...</span>
+                    </button>
+
+                    <div class="demo-account-hint">
+                        <div class="hint-title"><i class="fa-solid fa-circle-info"></i> Bản demo tĩnh</div>
+                        <p>Không có tài khoản mẫu. Hãy <a href="register.html">đăng ký tài khoản</a> để trải nghiệm; dữ liệu chỉ lưu trong trình duyệt này.</p>
+                    </div>
+
+                    <div class="auth-divider">
+                        <span>Đăng nhập bên thứ ba</span>
+                    </div>
+
+                    <div class="social-login-grid">
+                        <button type="button" class="social-auth-btn" disabled>
+                            <i class="fa-brands fa-google text-red"></i> Chưa cấu hình
+                        </button>
+                        <button type="button" class="social-auth-btn" disabled>
+                            <i class="fa-solid fa-id-card text-blue"></i> Chưa cấu hình
+                        </button>
+                    </div>
+
+                    <div class="auth-security-notice">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <span>Demo tĩnh: tài khoản và mật khẩu lưu trong localStorage, không dùng thông tin thật hoặc mật khẩu đang dùng ở nơi khác.</span>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Chân trang tối giản -->
+    <footer class="auth-footer">
+        <div class="container auth-footer-inner">
+            <p>&copy; 2026 EduTHCS. Hệ thống hỗ trợ học tập cấp Trung học Cơ sở toàn diện.</p>
+            <div class="footer-help-links">
+                <span>Bản demo tĩnh</span>
+                <span class="dot">•</span>
+                <a href="index.html#tro-giup">Hướng dẫn sử dụng</a>
+                <span class="dot">•</span>
+                <a href="forgot-password.html">Trợ giúp quên mật khẩu</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script File -->
+    <script src="auth.js"></script>
+</body>
+</html>

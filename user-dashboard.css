@@ -1,0 +1,434 @@
+/* ==========================================================
+   CSS DÀNH CHO TRANG GÓC HỌC TẬP CÁ NHÂN (USER DASHBOARD)
+   ========================================================== */
+
+.dashboard-body {
+    background: #f8fafc;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Topbar */
+.dash-topbar {
+    background: #ffffff;
+    border-bottom: 1px solid var(--border-color);
+    padding: 12px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.dash-topbar-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dash-topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.student-profile-pill {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f1f5f9;
+    padding: 6px 14px;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--border-color);
+}
+
+.student-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+.student-meta {
+    display: flex;
+    flex-direction: column;
+}
+
+.student-meta strong {
+    font-size: 0.85rem;
+    color: var(--text-heading);
+}
+
+.student-meta span {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+}
+
+/* Main Area */
+.dash-main {
+    flex: 1;
+    padding: 35px 0;
+}
+
+/* Welcome Banner */
+.student-welcome-banner {
+    background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #4338ca 100%);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    color: #ffffff;
+    display: grid;
+    grid-template-columns: 1.4fr 0.8fr;
+    gap: 30px;
+    align-items: center;
+    margin-bottom: 35px;
+    box-shadow: 0 15px 35px rgba(37, 99, 235, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.welcome-title {
+    font-family: var(--font-heading);
+    font-size: 2.1rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 10px 0;
+}
+
+.welcome-title .text-gradient {
+    color: #67e8f9;
+}
+
+.welcome-desc {
+    font-size: 0.98rem;
+    color: #bfdbfe;
+    max-width: 580px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.welcome-quick-stats {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.w-stat {
+    display: flex;
+    flex-direction: column;
+}
+
+.w-num {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #38bdf8;
+    line-height: 1.1;
+}
+
+.w-lbl {
+    font-size: 0.75rem;
+    color: #cbd5e1;
+    margin-top: 3px;
+}
+
+.w-divider {
+    width: 1px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.welcome-badge-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    text-align: center;
+}
+
+.badge-trophy-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #fbbf24;
+    color: #78350f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    margin: 0 auto 12px auto;
+}
+
+.welcome-badge-card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.welcome-badge-card p {
+    font-size: 0.82rem;
+    color: #e2e8f0;
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+.trophy-star-row {
+    color: #fbbf24;
+    font-size: 0.95rem;
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+}
+
+/* Grid 2 Cột */
+.dash-content-grid {
+    display: grid;
+    grid-template-columns: 1.45fr 0.85fr;
+    gap: 30px;
+}
+
+.dash-card {
+    background: #ffffff;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    padding: 26px;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 25px;
+}
+
+.dash-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.dash-card-header h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-heading);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.link-more {
+    font-size: 0.82rem;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.link-more:hover {
+    text-decoration: underline;
+}
+
+/* Subject Progress Items */
+.student-subject-progress-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.subj-progress-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.subj-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.subj-info .subj-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.subj-info strong {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--text-heading);
+}
+
+.subj-info span {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+}
+
+.subj-progress-bar {
+    height: 8px;
+    background: #f1f5f9;
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: var(--radius-full);
+}
+
+/* Exam Result Table */
+.exam-result-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+}
+
+.exam-result-table th {
+    background: #f8fafc;
+    padding: 12px 14px;
+    font-weight: 600;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border-color);
+    text-align: left;
+}
+
+.exam-result-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: middle;
+}
+
+.score-badge {
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.82rem;
+}
+
+.score-high { background: #dcfce7; color: #166534; }
+.score-mid { background: #eff6ff; color: #1e40af; }
+
+.status-pass {
+    color: #10b981;
+    font-weight: 600;
+    font-size: 0.82rem;
+}
+
+/* To-do List */
+.task-todo-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.task-todo-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.88rem;
+    color: var(--text-heading);
+    padding: 10px 14px;
+    background: #f8fafc;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+}
+
+.task-todo-item i {
+    font-size: 1.1rem;
+    color: #94a3b8;
+}
+
+.task-todo-item.completed {
+    color: #64748b;
+    text-decoration: line-through;
+    background: #f1f5f9;
+}
+
+.task-todo-item.completed i {
+    color: #10b981;
+}
+
+/* Advice & Support Cards */
+.card-advice {
+    background: linear-gradient(135deg, #fffbeb, #fef3c7);
+    border-color: #fde68a;
+}
+
+.advice-icon {
+    font-size: 1.8rem;
+    color: #d97706;
+    margin-bottom: 8px;
+}
+
+.card-advice h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #92400e;
+    margin-bottom: 6px;
+}
+
+.card-advice p {
+    font-size: 0.85rem;
+    color: #78350f;
+    line-height: 1.5;
+}
+
+.card-support {
+    text-align: center;
+    background: #f0fdf4;
+    border-color: #bbf7d0;
+}
+
+.sup-icon {
+    font-size: 2rem;
+    color: #16a34a;
+    margin-bottom: 8px;
+}
+
+.card-support h4 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #166534;
+    margin-bottom: 4px;
+}
+
+.card-support p {
+    font-size: 0.84rem;
+    color: #15803d;
+    margin-bottom: 16px;
+}
+
+/* Dashboard Footer */
+.dash-footer {
+    background: #ffffff;
+    border-top: 1px solid var(--border-color);
+    padding: 18px 0;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+}
+
+.dash-footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+@media (max-width: 992px) {
+    .student-welcome-banner {
+        grid-template-columns: 1fr;
+    }
+
+    .dash-content-grid {
+        grid-template-columns: 1fr;
+    }
+}

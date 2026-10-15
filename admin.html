@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảng Điều Khiển Quản Trị Viên (Admin) - EduTHCS</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin-body">
+
+    <!-- Toast Notification -->
+    <div id="toastNotification" class="toast-box"></div>
+
+    <!-- Thanh Topbar Quản trị -->
+    <header class="admin-topbar">
+        <div class="topbar-left">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-book-open-reader"></i>
+                </div>
+                <div class="logo-text">
+                    <span class="brand-name">Edu<span class="highlight">THCS</span> <span class="admin-badge-label">ADMIN</span></span>
+                    <span class="brand-slogan">Hệ Thống Quản Trị Học Tập Cấp 2</span>
+                </div>
+            </a>
+        </div>
+        
+        <div class="topbar-right">
+            <a href="index.html" class="btn btn-sm btn-outline"><i class="fa-solid fa-eye"></i> Xem Trang Chủ</a>
+            <a href="exam.html" class="btn btn-sm btn-outline"><i class="fa-solid fa-file-pen"></i> Phòng Thi</a>
+            <a href="profile.html" class="btn btn-sm btn-primary" title="Xem và chỉnh sửa hồ sơ"><i class="fa-solid fa-id-badge"></i> Trang Cá Nhân</a>
+            <a href="profile.html" class="admin-profile-pill" style="text-decoration:none; color:inherit;" title="Xem hồ sơ">
+                <div class="admin-avatar">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+                <div class="admin-info">
+                    <span class="admin-name" id="currentAdminName">Quản trị viên demo</span>
+                    <span class="admin-role">Quản Trị Viên Cấp Cao</span>
+                </div>
+            </a>
+            <button class="btn-logout-icon" onclick="handleLogout()" title="Đăng xuất">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            </button>
+        </div>
+    </header>
+
+    <div class="admin-layout">
+        
+        <!-- Sidebar Menu -->
+        <aside class="admin-sidebar">
+            <div class="sidebar-user-card">
+                <div class="sidebar-avatar"><i class="fa-solid fa-shield-halved"></i></div>
+                <h4>Trung Tâm Quản Trị</h4>
+                <p>EduTHCS Portal v2.6</p>
+            </div>
+
+            <nav class="sidebar-nav">
+                <button class="nav-item active" onclick="switchAdminTab('overview')">
+                    <i class="fa-solid fa-chart-pie"></i> Tổng Quan Hệ Thống
+                </button>
+                <button class="nav-item" onclick="switchAdminTab('users')">
+                    <i class="fa-solid fa-users-gear"></i> Quản Lý Tài Khoản (<span id="userCountBadge">4</span>)
+                </button>
+                <button class="nav-item" onclick="switchAdminTab('subjects')">
+                    <i class="fa-solid fa-book-bookmark"></i> Quản Lý Môn Học Cấp 2
+                </button>
+                <button class="nav-item" onclick="switchAdminTab('exams')">
+                    <i class="fa-solid fa-file-pen"></i> Ngân Hàng Đề Thi
+                </button>
+                <button class="nav-item" onclick="switchAdminTab('questions')">
+                    <i class="fa-solid fa-comments"></i> Duyệt Hỏi Đáp Học Sinh
+                </button>
+                <button class="nav-item" onclick="switchAdminTab('settings')">
+                    <i class="fa-solid fa-sliders"></i> Cài Đặt Hệ Thống
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="btn btn-sm btn-outline-danger btn-block" onclick="handleLogout()">
+                    <i class="fa-solid fa-power-off"></i> Đăng Xuất Admin
+                </button>
+            </div>
+        </aside>
+
+        <!-- Nội Dung Chính Admin -->
+        <main class="admin-main">
+            
+            <!-- TAB 1: TỔNG QUAN -->
+            <section class="admin-tab-content active" id="tab-overview">
+                <div class="page-header">
+                    <div>
+                        <h2 class="page-title">Bảng Tổng Quan Hoạt Động 📊</h2>
+                        <p class="page-subtitle">Dữ liệu học tập thời gian thực của học sinh THCS trên toàn hệ thống</p>
+                    </div>
+                    <div class="header-action-btns">
+                        <button class="btn btn-sm btn-primary" onclick="showAddUserModal()"><i class="fa-solid fa-user-plus"></i> Thêm Người Dùng</button>
+                        <button class="btn btn-sm btn-secondary" onclick="alert('Đã đồng bộ dữ liệu SGK mới!')"><i class="fa-solid fa-rotate"></i> Làm Mới Dữ Liệu</button>
+                    </div>
+                </div>
+
+                <div class="admin-panel" style="margin-bottom:20px; padding:14px 18px; color:#92400e; background:#fffbeb; border-color:#fde68a;">
+                    Đây là bản demo tĩnh. Dữ liệu chỉ lưu trong trình duyệt; giao diện này không cung cấp quyền quản trị an toàn.
+                </div>
+
+                <!-- Thẻ thống kê (Stat Cards) -->
+                <div class="stats-grid">
+                    <div class="stat-card card-blue">
+                        <div class="stat-icon"><i class="fa-solid fa-user-graduate"></i></div>
+                        <div class="stat-details">
+                            <span class="stat-title">Học Sinh Đang Học</span>
+                            <span class="stat-val">15,420</span>
+                            <span class="stat-change text-green"><i class="fa-solid fa-arrow-trend-up"></i> +12% tuần này</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card card-purple">
+                        <div class="stat-icon"><i class="fa-solid fa-book-open"></i></div>
+                        <div class="stat-details">
+                            <span class="stat-title">Bài Giảng Môn Học</span>
+                            <span class="stat-val">1,240</span>
+                            <span class="stat-change text-blue">8 môn trọng tâm cấp 2</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card card-orange">
+                        <div class="stat-icon"><i class="fa-solid fa-file-signature"></i></div>
+                        <div class="stat-details">
+                            <span class="stat-title">Đề Thi & Kiểm Tra</span>
+                            <span class="stat-val">350</span>
+                            <span class="stat-change text-green"><i class="fa-solid fa-check"></i> Đầy đủ đáp án chi tiết</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card card-green">
+                        <div class="stat-icon"><i class="fa-solid fa-circle-question"></i></div>
+                        <div class="stat-details">
+                            <span class="stat-title">Câu Hỏi Bài Tập Cần Giải</span>
+                            <span class="stat-val">28</span>
+                            <span class="stat-change text-orange"><i class="fa-solid fa-clock"></i> Chờ giáo viên phản hồi</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2 Cột dữ liệu tóm tắt -->
+                <div class="overview-details-grid">
+                    <!-- Danh sách học sinh mới đăng ký -->
+                    <div class="admin-panel">
+                        <div class="panel-header">
+                            <h3><i class="fa-solid fa-clock-rotate-left"></i> Hoạt Động Học Tập Gần Đây</h3>
+                            <a href="#" onclick="switchAdminTab('users')">Xem tất cả</a>
+                        </div>
+                        <div class="recent-activities-list">
+                            <div class="activity-item">
+                                <div class="act-avatar bg-blue"><i class="fa-solid fa-user-graduate"></i></div>
+                                <div class="act-body">
+                                    <strong>Học sinh demo (Lớp 9)</strong> vừa hoàn thành đề thi Giữa Kỳ 1 Môn Toán.
+                                    <span class="act-time">5 phút trước • Đạt 9.5 điểm</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="act-avatar bg-purple"><i class="fa-solid fa-question"></i></div>
+                                <div class="act-body">
+                                    <strong>Học sinh demo (Lớp 8)</strong> vừa gửi câu hỏi môn Khoa Học Tự Nhiên.
+                                    <span class="act-time">18 phút trước • Cần giải thích phản ứng hóa học</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="act-avatar bg-green"><i class="fa-solid fa-chalkboard-user"></i></div>
+                                <div class="act-body">
+                                    <strong>Giáo viên demo</strong> vừa thêm 5 đề thi Tiếng Anh 8 Global Success.
+                                    <span class="act-time">1 giờ trước • Đã xuất bản lên hệ thống</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tỉ lệ học tập theo môn -->
+                    <div class="admin-panel">
+                        <div class="panel-header">
+                            <h3><i class="fa-solid fa-fire"></i> Môn Học Được Quan Tâm Nhất</h3>
+                        </div>
+                        <div class="subject-progress-stats">
+                            <div class="subj-stat-row">
+                                <div class="subj-meta">
+                                    <span>📐 Toán học (Lớp 6-9)</span>
+                                    <strong>38% (5.860 bạn)</strong>
+                                </div>
+                                <div class="progress-bar-bg"><div class="bar-fill bg-blue" style="width: 38%;"></div></div>
+                            </div>
+                            <div class="subj-stat-row">
+                                <div class="subj-meta">
+                                    <span>🌐 Tiếng Anh THCS</span>
+                                    <strong>28% (4.320 bạn)</strong>
+                                </div>
+                                <div class="progress-bar-bg"><div class="bar-fill bg-green" style="width: 28%;"></div></div>
+                            </div>
+                            <div class="subj-stat-row">
+                                <div class="subj-meta">
+                                    <span>📖 Ngữ văn Cấp 2</span>
+                                    <strong>20% (3.080 bạn)</strong>
+                                </div>
+                                <div class="progress-bar-bg"><div class="bar-fill bg-orange" style="width: 20%;"></div></div>
+                            </div>
+                            <div class="subj-stat-row">
+                                <div class="subj-meta">
+                                    <span>🔬 Khoa học tự nhiên</span>
+                                    <strong>14% (2.160 bạn)</strong>
+                                </div>
+                                <div class="progress-bar-bg"><div class="bar-fill bg-purple" style="width: 14%;"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 2: QUẢN LÝ TÀI KHOẢN NGƯỜI DÙNG -->
+            <section class="admin-tab-content" id="tab-users">
+                <div class="page-header">
+                    <div>
+                        <h2 class="page-title">Quản Lý Danh Sách Tài Khoản 👥</h2>
+                        <p class="page-subtitle">Bao gồm Quản Trị Viên (Admin), Học Sinh Cấp 2, Giáo Viên và Phụ Huynh</p>
+                    </div>
+                    <div class="header-action-btns">
+                        <button class="btn btn-sm btn-primary" onclick="showAddUserModal()">
+                            <i class="fa-solid fa-plus"></i> Thêm Tài Khoản Mới
+                        </button>
+                    </div>
+                </div>
+
+                <div class="table-filter-bar">
+                    <div class="search-input-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="userSearchInput" placeholder="Tìm kiếm theo tên, email, vai trò..." onkeyup="filterUserTable()">
+                    </div>
+                    <div class="filter-role-select">
+                        <select id="roleFilterSelect" onchange="filterUserTable()">
+                            <option value="all">Tất cả vai trò</option>
+                            <option value="admin">Quản Trị Viên (Admin)</option>
+                            <option value="student">Học Sinh THCS</option>
+                            <option value="teacher">Giáo Viên</option>
+                            <option value="parent">Phụ Huynh</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Bảng danh sách tài khoản -->
+                <div class="table-responsive">
+                    <table class="admin-table" id="usersTable">
+                        <thead>
+                            <tr>
+                                <th>Người Dùng</th>
+                                <th>Tài Khoản / Email</th>
+                                <th>Mật Khẩu</th>
+                                <th>Vai Trò</th>
+                                <th>Trạng Thái</th>
+                                <th>Thao Tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody">
+                            <!-- Được nạp tự động qua JavaScript từ auth.js / localStorage -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- TAB 3: QUẢN LÝ MÔN HỌC -->
+            <section class="admin-tab-content" id="tab-subjects">
+                <div class="page-header">
+                    <div>
+                        <h2 class="page-title">Quản Lý Danh Mục Môn Học 📚</h2>
+                        <p class="page-subtitle">Điều chỉnh nội dung, số bài học và chuyên đề theo chương trình GDPT mới</p>
+                    </div>
+                    <button class="btn btn-sm btn-primary" onclick="alert('Đã mở form thêm chuyên đề môn học mới!')">
+                        <i class="fa-solid fa-plus"></i> Thêm Chuyên Đề
+                    </button>
+                </div>
+
+                <div class="admin-grid-cards">
+                    <div class="admin-item-card">
+                        <div class="a-card-header">
+                            <span class="badge-tag bg-blue-tag">Lớp 6 - 9</span>
+                            <div class="a-card-actions">
+                                <button class="btn-icon" title="Sửa"><i class="fa-solid fa-pen"></i></button>
+                            </div>
+                        </div>
+                        <h3>📐 Toán Học THCS</h3>
+                        <p>180+ bài giảng video, 1200+ bài tập Đại số & Hình học trực quan.</p>
+                        <div class="a-card-footer">
+                            <span>Phụ trách: Giáo viên demo</span>
+                            <strong class="text-green">Đang hoạt động</strong>
+                        </div>
+                    </div>
+
+                    <div class="admin-item-card">
+                        <div class="a-card-header">
+                            <span class="badge-tag bg-orange-tag">Lớp 6 - 9</span>
+                            <div class="a-card-actions">
+                                <button class="btn-icon" title="Sửa"><i class="fa-solid fa-pen"></i></button>
+                            </div>
+                        </div>
+                        <h3>📖 Ngữ Văn THCS</h3>
+                        <p>Soạn bài chuẩn 3 bộ SGK mới, 500+ bài văn mẫu chọn lọc điểm 8+.</p>
+                        <div class="a-card-footer">
+                            <span>Phụ trách: Thầy Đỗ Văn Bình</span>
+                            <strong class="text-green">Đang hoạt động</strong>
+                        </div>
+                    </div>
+
+                    <div class="admin-item-card">
+                        <div class="a-card-header">
+                            <span class="badge-tag bg-green-tag">Lớp 6 - 9</span>
+                            <div class="a-card-actions">
+                                <button class="btn-icon" title="Sửa"><i class="fa-solid fa-pen"></i></button>
+                            </div>
+                        </div>
+                        <h3>🌐 Tiếng Anh (English)</h3>
+                        <p>210+ bài giảng ngữ pháp, từ vựng theo Unit có phát âm chuẩn bản xứ.</p>
+                        <div class="a-card-footer">
+                            <span>Phụ trách: Cô Jennifer Vũ</span>
+                            <strong class="text-green">Đang hoạt động</strong>
+                        </div>
+                    </div>
+
+                    <div class="admin-item-card">
+                        <div class="a-card-header">
+                            <span class="badge-tag bg-purple-tag">Lớp 6 - 9</span>
+                            <div class="a-card-actions">
+                                <button class="btn-icon" title="Sửa"><i class="fa-solid fa-pen"></i></button>
+                            </div>
+                        </div>
+                        <h3>🔬 Khoa Học Tự Nhiên</h3>
+                        <p>Tích hợp Vật lý, Hóa học và Sinh học kèm phòng thí nghiệm mô phỏng ảo.</p>
+                        <div class="a-card-footer">
+                            <span>Phụ trách: Thầy Vũ Tuấn Anh</span>
+                            <strong class="text-green">Đang hoạt động</strong>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 4: DUYỆT HỎI ĐÁP -->
+            <section class="admin-tab-content" id="tab-questions">
+                <div class="page-header">
+                    <div>
+                        <h2 class="page-title">Hộp Thư Hỏi Đáp Bài Tập 💬</h2>
+                        <p class="page-subtitle">Các câu hỏi bài tập do học sinh cấp 2 gửi từ trang chủ EduTHCS</p>
+                    </div>
+                </div>
+
+                <div class="qa-inbox-list">
+                    <div class="qa-item-card">
+                        <div class="qa-meta-row">
+                            <span class="badge-tag bg-blue-tag">Toán 9 - Đại số</span>
+                            <span class="qa-author">Học sinh: <strong>Học sinh demo</strong></span>
+                            <span class="qa-time">10 phút trước</span>
+                        </div>
+                        <h4 class="qa-question-title">Cách rút gọn biểu thức có chứa căn bậc hai khi mẫu số có dạng căn bậc hai cộng trừ?</h4>
+                        <p class="qa-content-text">"Em đang gặp khó khăn khi trục căn thức ở mẫu của bài toán: A = 1 / (sqrt(3) + sqrt(2)). Xin thầy cô hướng dẫn công thức nhân liên hợp ạ!"</p>
+                        <div class="qa-reply-box">
+                            <input type="text" placeholder="Nhập câu trả lời hoặc gợi ý hướng dẫn học sinh..." id="replyInput1">
+                            <button class="btn btn-sm btn-primary" onclick="alert('Đã gửi phản hồi trực tiếp tới học sinh!')">Gửi Phản Hồi</button>
+                        </div>
+                    </div>
+
+                    <div class="qa-item-card">
+                        <div class="qa-meta-row">
+                            <span class="badge-tag bg-purple-tag">KHTN 8 - Hóa học</span>
+                            <span class="qa-author">Học sinh: <strong>Nguyễn Hà Linh</strong></span>
+                            <span class="qa-time">35 phút trước</span>
+                        </div>
+                        <h4 class="qa-question-title">Mẹo nhớ nhanh hóa trị của các gốc axit thường gặp trong chương trình lớp 8?</h4>
+                        <p class="qa-content-text">"Thầy cô có bài thơ hay cách nào để ghi nhớ hóa trị của nhóm -OH, =SO4, =CO3, -NO3 dễ thuộc nhất không ạ?"</p>
+                        <div class="qa-reply-box">
+                            <input type="text" placeholder="Nhập câu trả lời hoặc gợi ý hướng dẫn học sinh..." id="replyInput2">
+                            <button class="btn btn-sm btn-primary" onclick="alert('Đã gửi phản hồi trực tiếp tới học sinh!')">Gửi Phản Hồi</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 5: CÀI ĐẶT -->
+            <section class="admin-tab-content" id="tab-settings">
+                <div class="page-header">
+                    <div>
+                        <h2 class="page-title">Cài Đặt Hệ Thống ⚙️</h2>
+                        <p class="page-subtitle">Cấu hình thông tin cổng học tập, niên khóa và phân quyền bảo mật</p>
+                    </div>
+                </div>
+
+                <div class="settings-box">
+                    <div class="form-group">
+                        <label class="form-label">Tên cổng học tập:</label>
+                        <input type="text" class="form-input" value="EduTHCS - Cổng Hỗ Trợ Học Tập Toàn Diện Cấp 2">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Niên khóa đào tạo hiện tại:</label>
+                        <input type="text" class="form-input" value="2026 - 2027">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Hotline hỗ trợ học sinh:</label>
+                        <input type="text" class="form-input" value="Chưa cấu hình" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Cho phép học sinh tự đăng ký tài khoản:</label>
+                        <select class="form-input">
+                            <option value="1">Bật (Học sinh tự do có thể tạo tài khoản)</option>
+                            <option value="0">Tắt (Chỉ cấp tài khoản qua mã nhà trường)</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary" onclick="alert('Đã lưu cấu hình hệ thống!')">Lưu Thay Đổi</button>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Modal Thêm Tài Khoản Mới -->
+    <div class="modal-overlay" id="addUserModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeAddUserModal()">&times;</button>
+            <div class="modal-header">
+                <div class="modal-icon bg-blue"><i class="fa-solid fa-user-plus"></i></div>
+                <div>
+                    <h3>Thêm Tài Khoản Mới</h3>
+                    <p class="modal-grade-tag">Cấp quyền truy cập hệ thống EduTHCS</p>
+                </div>
+            </div>
+            <form id="addUserForm" onsubmit="handleAddNewUser(event)">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="form-label">Họ và tên người dùng <span class="required">*</span></label>
+                        <input type="text" id="newFullName" class="form-input" placeholder="Nhập họ và tên..." required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Tài khoản / Email đăng nhập <span class="required">*</span></label>
+                        <input type="text" id="newUsername" class="form-input" placeholder="Nhập tài khoản hoặc email..." required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Mật khẩu khởi tạo <span class="required">*</span></label>
+                        <input type="password" id="newPassword" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Vai trò tài khoản <span class="required">*</span></label>
+                        <select id="newRole" class="form-input">
+                            <option value="student">🎓 Học Sinh Cấp 2</option>
+                            <option value="teacher">👨‍🏫 Giáo Viên</option>
+                            <option value="parent">👨‍👩‍👧 Phụ Huynh</option>
+                            <option value="admin">🛡️ Quản Trị Viên (Admin)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeAddUserModal()">Hủy Bỏ</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> Lưu Tài Khoản</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Script File -->
+    <script src="auth.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

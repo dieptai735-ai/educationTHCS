@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduSecondary - Cổng Hỗ Trợ Học Tập Toàn Diện Cấp 2 (THCS)</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ======================================================== -->
+    <!-- PHẦN 1: ĐẦU TRANG (HEADER)                               -->
+    <!-- ======================================================== -->
+    <header class="site-header" id="top">
+        <!-- Thanh thông báo trên cùng (Top Bar) -->
+        <div class="top-bar">
+            <div class="container top-bar-content">
+                <div class="top-info">
+                    <span><i class="fa-solid fa-graduation-cap"></i> Hệ thống học tập theo chuẩn chương trình GDPT mới (Kết Nối Tri Thức, Cánh Diều, Chân Trời Sáng Tạo)</span>
+                </div>
+                <div class="top-actions">
+                    <span><i class="fa-solid fa-circle-info"></i> Bản demo tĩnh</span>
+                    <span class="divider">|</span>
+                    <a href="login.html"><i class="fa-solid fa-right-to-bracket"></i> Đăng Nhập</a>
+                    <span class="divider">|</span>
+                    <a href="#tinh-nang-ho-tro"><i class="fa-regular fa-circle-question"></i> Hỗ trợ học tập 24/7</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Thanh điều hướng chính (Main Navigation) -->
+        <nav class="main-navbar">
+            <div class="container nav-container">
+                <a href="#" class="logo">
+                    <div class="logo-icon">
+                        <i class="fa-solid fa-book-open-reader"></i>
+                    </div>
+                    <div class="logo-text">
+                        <span class="brand-name">Edu<span class="highlight">THCS</span></span>
+                        <span class="brand-slogan">Vững bước Cấp 2 - Tự tin vào 10</span>
+                    </div>
+                </a>
+
+                <!-- Nút bật menu trên mobile -->
+                <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Mở menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+                <!-- Danh sách liên kết -->
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#top" class="active"><i class="fa-solid fa-house"></i> Trang chủ</a></li>
+                    <li class="has-dropdown">
+                        <a href="#khoi-lop"><i class="fa-solid fa-layer-group"></i> Khối Lớp <i class="fa-solid fa-chevron-down arrow-icon"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#khoi-lop" onclick="filterByGrade('all')"><i class="fa-solid fa-border-all"></i> Tất cả các lớp</a></li>
+                            <li><a href="#khoi-lop" onclick="filterByGrade('6')"><i class="fa-solid fa-dice-one"></i> Lớp 6 (Bứt phá khởi đầu)</a></li>
+                            <li><a href="#khoi-lop" onclick="filterByGrade('7')"><i class="fa-solid fa-dice-two"></i> Lớp 7 (Nâng cao kiến thức)</a></li>
+                            <li><a href="#khoi-lop" onclick="filterByGrade('8')"><i class="fa-solid fa-dice-three"></i> Lớp 8 (Tăng tốc kiến thức)</a></li>
+                            <li><a href="#khoi-lop" onclick="filterByGrade('9')"><i class="fa-solid fa-dice-four"></i> Lớp 9 (Luyện thi vào 10)</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#mon-hoc"><i class="fa-solid fa-shapes"></i> Môn Học</a></li>
+                    <li><a href="#tinh-nang-ho-tro"><i class="fa-solid fa-wand-magic-sparkles"></i> Góc Hỗ Trợ</a></li>
+                    <li><a href="exam.html"><i class="fa-solid fa-file-signature"></i> Kỳ Thi Tuần (00:00 Thứ 2)</a></li>
+                    <li><a href="#kinh-nghiem"><i class="fa-regular fa-lightbulb"></i> Mẹo Học Giỏi</a></li>
+                </ul>
+
+                <div class="nav-cta">
+                    <button class="btn-search-trigger" id="searchTrigger" title="Tìm bài học">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                    <a href="login.html" class="btn btn-outline"><i class="fa-solid fa-user-graduate"></i> Đăng Nhập</a>
+                    <a href="#mon-hoc" class="btn btn-primary"><i class="fa-solid fa-rocket"></i> Học Ngay</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Thanh tìm kiếm popup ẩn/hiện -->
+        <div class="search-popup" id="searchPopup">
+            <div class="container search-box-wrapper">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" id="mainSearchInput" placeholder="Tìm kiếm môn học, bài giải, công thức (Toán, Văn, Anh, KHTN...)...">
+                <button class="close-search" id="closeSearch">&times;</button>
+            </div>
+        </div>
+
+        <!-- Banner Chào Mừng (Hero Section) -->
+        <div class="hero-section">
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <div class="badge-tag">
+                        <i class="fa-solid fa-star"></i> Nền tảng học tập trực tuyến hàng đầu cho học sinh Cấp 2
+                    </div>
+                    <h1 class="hero-title">
+                        Hỗ Trợ Học Tập Toàn Diện <br>
+                        <span class="text-gradient">Chinh Phục Mọi Môn Học THCS</span>
+                    </h1>
+                    <p class="hero-description">
+                        Giải bài tập chuẩn SGK mới, tóm tắt lý thuyết bằng sơ đồ tư duy, 
+                        kho 10.000+ đề kiểm tra 15 phút, giữa kỳ, học kỳ và lộ trình ôn thi vào lớp 10 chuyên sâu.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#mon-hoc" class="btn btn-lg btn-primary shadow-pulse">
+                            <i class="fa-solid fa-book-bookmark"></i> Khám Phá Môn Học
+                        </a>
+                        <a href="#hoi-dap-ai" class="btn btn-lg btn-secondary">
+                            <i class="fa-solid fa-robot"></i> Trợ Lý Giải Bài 24/7
+                        </a>
+                    </div>
+                    <!-- Chỉ số nổi bật -->
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">Bám sát SGK mới</span>
+                        </div>
+                        <div class="stat-separator"></div>
+                        <div class="stat-item">
+                            <span class="stat-number">12+</span>
+                            <span class="stat-label">Môn học THCS</span>
+                        </div>
+                        <div class="stat-separator"></div>
+                        <div class="stat-item">
+                            <span class="stat-number">50.000+</span>
+                            <span class="stat-label">Bài giải chi tiết</span>
+                        </div>
+                        <div class="stat-separator"></div>
+                        <div class="stat-item">
+                            <span class="stat-number">4.9 / 5</span>
+                            <span class="stat-label">Đánh giá yêu thích</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <div class="visual-card-main">
+                        <div class="student-illustration">
+                            <div class="floating-badge badge-math">
+                                <i class="fa-solid fa-square-root-variable"></i> Toán: Đại số & Hình học
+                            </div>
+                            <div class="floating-badge badge-literature">
+                                <i class="fa-solid fa-feather-pointed"></i> Văn: Phân tích & Soạn bài
+                            </div>
+                            <div class="floating-badge badge-english">
+                                <i class="fa-solid fa-language"></i> Anh: Ngữ pháp & Từ vựng
+                            </div>
+                            <div class="floating-badge badge-science">
+                                <i class="fa-solid fa-atom"></i> KHTN: Lý - Hóa - Sinh
+                            </div>
+                            <div class="hero-avatar-box">
+                                <div class="avatar-ring">
+                                    <i class="fa-solid fa-user-graduate center-student-icon"></i>
+                                </div>
+                                <div class="status-pill">
+                                    <span class="dot-online"></span> Đang có 15.420 bạn cùng học
+                                </div>
+                            </div>
+                        </div>
+                        <div class="quick-study-card">
+                            <div class="q-icon"><i class="fa-solid fa-bullseye"></i></div>
+                            <div class="q-text">
+                                <strong>Mục tiêu hôm nay:</strong>
+                                <span>Hoàn thành 1 đề Toán + Ôn từ vựng Unit 4</span>
+                            </div>
+                            <div class="q-progress">
+                                <div class="progress-bar-inner" style="width: 75%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- ======================================================== -->
+    <!-- PHẦN 2: THÂN TRANG (BODY / MAIN CONTENT)                  -->
+    <!-- ======================================================== -->
+    <main class="site-main" id="than-trang">
+
+        <!-- 2.1: Bộ chọn Khối Lớp Nhanh (Grade Selection Tabs) -->
+        <section class="section grade-selector-section" id="khoi-lop">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="sub-badge">Chương trình đào tạo</span>
+                    <h2 class="section-title">Chọn Khối Lớp Để Bắt Đầu Học Tập</h2>
+                    <p class="section-subtitle">Nội dung được biên soạn chuẩn hóa theo 3 bộ sách: Kết Nối Tri Thức, Cánh Diều, Chân Trời Sáng Tạo</p>
+                </div>
+
+                <div class="grade-tabs" id="gradeTabs">
+                    <button class="grade-tab-btn active" data-grade="all" onclick="filterByGrade('all')">
+                        <i class="fa-solid fa-layer-group"></i> Tất cả các lớp
+                    </button>
+                    <button class="grade-tab-btn" data-grade="6" onclick="filterByGrade('6')">
+                        <span class="grade-num">Lớp 6</span>
+                        <span class="grade-desc">Làm quen Cấp 2</span>
+                    </button>
+                    <button class="grade-tab-btn" data-grade="7" onclick="filterByGrade('7')">
+                        <span class="grade-num">Lớp 7</span>
+                        <span class="grade-desc">Nâng cao tư duy</span>
+                    </button>
+                    <button class="grade-tab-btn" data-grade="8" onclick="filterByGrade('8')">
+                        <span class="grade-num">Lớp 8</span>
+                        <span class="grade-desc">Bứt phá kiến thức</span>
+                    </button>
+                    <button class="grade-tab-btn" data-grade="9" onclick="filterByGrade('9')">
+                        <span class="grade-num">Lớp 9</span>
+                        <span class="grade-desc">Chinh phục kỳ thi vào 10</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2.2: Các Môn Học Trọng Tâm Cấp 2 (Subjects Grid) -->
+        <section class="section subjects-section" id="mon-hoc">
+            <div class="container">
+                <div class="section-header flex-between">
+                    <div>
+                        <span class="sub-badge">Danh mục môn học</span>
+                        <h2 class="section-title">Các Môn Học Trọng Tâm Cấp 2</h2>
+                        <p class="section-subtitle">Đầy đủ lý thuyết, bài giải SGK/SBT, sơ đồ tư duy và bài tập luyện tập</p>
+                    </div>
+                    <div class="subject-search-filter">
+                        <input type="text" id="subjectFilterInput" placeholder="Tìm nhanh môn học..." onkeyup="filterSubjectsByName()">
+                    </div>
+                </div>
+
+                <!-- Grid các môn học -->
+                <div class="subjects-grid" id="subjectsGrid">
+
+                    <!-- Môn 1: Toán học -->
+                    <div class="subject-card card-math" data-grade="6 7 8 9" data-name="toán học dai so hinh hoc">
+                        <div class="subject-header">
+                            <div class="subject-icon-box">
+                                <i class="fa-solid fa-calculator"></i>
+                            </div>
+                            <span class="grade-badge">Lớp 6 - 9</span>
+                        </div>
+                        <h3 class="subject-title">Toán Học</h3>
+                        <p class="subject-summary">Bao gồm Đại số và Hình học trực quan. Phương pháp giải toán nhanh, công thức cốt lõi và các dạng toán hay gặp.</p>
+                        <ul class="subject-features">
+                            <li><i class="fa-solid fa-check"></i> Giải bài tập SGK & SBT chi tiết</li>
+                            <li><i class="fa-solid fa-check"></i> Chuyên đề phương trình, bất đẳng thức</li>
+                            <li><i class="fa-solid fa-check"></i> Ôn luyện hình học không gian & phẳng</li>
+                        </ul>
+                        <div class="subject-footer">
+                            <span class="lesson-count"><i class="fa-regular fa-folder-open"></i> 180+ Bài học</span>
+                            <button class="btn btn-sm btn-subject" onclick="openSubjectModal('math')">Vào học ngay <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Môn 2: Ngữ văn -->
+                    <div class="subject-card card-literature" data-grade="6 7 8 9" data-name="ngữ văn soan van van mau tho truyen">
+                        <div class="subject-header">
+                            <div class="subject-icon-box">
+                                <i class="fa-solid fa-book-bookmark"></i>
+                            </div>
+                            <span class="grade-badge">Lớp 6 - 9</span>
+                        </div>
+                        <h3 class="subject-title">Ngữ Văn</h3>
+                        <p class="subject-summary">Soạn bài ngắn gọn súc tích, kho bài văn mẫu đạt điểm 8+, hướng dẫn viết đoạn văn nghị luận xã hội và văn học.</p>
+                        <ul class="subject-features">
+                            <li><i class="fa-solid fa-check"></i> Hướng dẫn soạn bài theo bài học SGK</li>
+                            <li><i class="fa-solid fa-check"></i> Dàn ý chi tiết & 500+ bài văn mẫu</li>
+                            <li><i class="fa-solid fa-check"></i> Rèn kỹ năng viết đoạn nghị luận 200 chữ</li>
+                        </ul>
+                        <div class="subject-footer">
+                            <span class="lesson-count"><i class="fa-regular fa-folder-open"></i> 145+ Bài học</span>
+                            <button class="btn btn-sm btn-subject" onclick="openSubjectModal('literature')">Vào học ngay <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Môn 3: Tiếng Anh -->
+                    <div class="subject-card card-english" data-grade="6 7 8 9" data-name="tiếng anh english ngu phap tu vung pronunciation">
+                        <div class="subject-header">
+                            <div class="subject-icon-box">
+                                <i class="fa-solid fa-globe"></i>
+                            </div>
+                            <span class="grade-badge">Lớp 6 - 9</span>
+                        </div>
+                        <h3 class="subject-title">Tiếng Anh (English)</h3>
+                        <p class="subject-summary">Hệ thống ngữ pháp từ cơ bản đến nâng cao (thì, câu bị động, câu điều kiện), từ vựng theo Unit có phát âm chuẩn bản xứ.</p>
+                        <ul class="subject-features">
+                            <li><i class="fa-solid fa-check"></i> Từ vựng kèm audio phát âm chuẩn</li>
+                            <li><i class="fa-solid fa-check"></i> Ngữ pháp bám sát khung Global Success/i-Learn</li>
+                            <li><i class="fa-solid fa-check"></i> Trắc nghiệm luyện đề thi có giải thích</li>
+                        </ul>
+                        <div class="subject-footer">
+                            <span class="lesson-count"><i class="fa-regular fa-folder-open"></i> 210+ Bài học</span>
+                            <button class="btn btn-sm btn-subject" onclick="openSubjectModal('english')">Vào học ngay <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Môn 4: Khoa học Tự nhiên (KHTN) -->
+                    <div class="subject-card card-science" data-grade="6 7 8 9" data-name="khoa học tự nhiên khtn vat ly hoa hoc sinh hoc">
+                        <div class="subject-header">
+                            <div class="subject-icon-box">
+                                <i class="fa-solid fa-flask-vial"></i>
+                            </div>
+                            <span class="grade-badge">Lớp 6 - 9</span>
+                        </div>
+                        <h3 class="subject-title">Khoa Học Tự Nhiên</h3>
+                        <p class="subject-summary">Tích hợp Vật lý, Hóa học và Sinh học. Mô phỏng thí nghiệm trực quan, sơ đồ tư duy giải thích hiện tượng tự nhiên thú vị.</p>
+                        <ul class="subject-features">
+                            <li><i class="fa-solid fa-check"></i> Thí nghiệm mô phỏng ảo 3D sinh động</li>
+                            <li><i class="fa-solid fa-check"></i> Công thức Vật lý & Bảng tuần hoàn Hóa học</li>
+                            <li><i class="fa-solid fa-check"></i> Sơ đồ cơ chế Sinh học dễ hiểu</li>
+                        </ul>
+                        <div class="subject-footer">
+                            <span class="lesson-count"><i class="fa-regular fa-folder-open"></i> 160+ Bài học</span>
+                            <button class="btn btn-sm btn-subject" onclick="openSubjectModal('science')">Vào học ngay <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Môn 5: Lịch sử & Địa lý -->
+                    <div class="subject-card card-history" data-grade="6 7 8 9" data-name="lịch sử địa lý su dia ban do truc quan">
+                        <div class="subject-header">
+                            <div class="subject-icon-box">
+                                <i class="fa-solid fa-landmark-dome"></i>
+                            </div>
+                            <span class="grade-badge">Lớp 6 - 9</span>
+                        </div>
+                        <h3 class="subject-title">Lịch Sử & Địa Lý</h3>
+                        <p class="subject-summary">Dòng thời gian sự kiện lịch sử hào hùng cùng bản đồ tương tác Địa lý Việt Nam và thế giới, ghi nhớ nhanh không học vẹt.</p>
+                        <ul class="subject-features">
+                            <li><i class="fa-solid fa-check"></i> Dòng thời gian mốc lịch sử đồ họa</li>
+                            <li><i class="fa-solid fa-check"></i> Bản đồ địa lý số tương tác</li>
+                            <li><i class="fa-solid fa-check"></i> Câu hỏi trắc nghiệm ôn tập nhanh</li>
+                        </ul>
+                        <div class="subject-footer">
+                            <span class="lesson-count"><i class="fa-regular fa-folder-open"></i> 120+ Bài học</span>
+                            <button class="btn btn-sm btn-subject" onclick="openSubjectModal('history')">Vào học ngay <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Môn 6: Tin học & Công nghệ -->
+                    <div class="subject-card card-informatics" data-grade="6 7 8 9" data-name="tin học cong nghe lap trinh scratch python word excel">
+                        <div class="subject-header">
+                            <div class="subject-icon-box">
+                                <i class="fa-solid fa-laptop-code"></i>
+                            </div>
+                            <span class="grade-badge">Lớp 6 - 9</span>
+                        </div>
+                        <h3 class="subject-title">Tin Học & Công Nghệ</h3>
+                        <p class="subject-summary">Làm quen tư duy thuật toán, lập trình khối Scratch, ngôn ngữ Python, kỹ năng tin học văn phòng và an toàn trên không gian mạng.</p>
+                        <ul class="subject-features">
+                            <li><i class="fa-solid fa-check"></i> Thực hành lập trình khối & Python</li>
+                            <li><i class="fa-solid fa-check"></i> Kỹ năng số và an toàn Internet cho học sinh</li>
+                            <li><i class="fa-solid fa-check"></i> Hướng dẫn bài tập thực hành máy tính</li>
+                        </ul>
+                        <div class="subject-footer">
+                            <span class="lesson-count"><i class="fa-regular fa-folder-open"></i> 95+ Bài học</span>
+                            <button class="btn btn-sm btn-subject" onclick="openSubjectModal('informatics')">Vào học ngay <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Môn 7: Giáo Dục Công Dân (GDCD) -->
+                    <div class="subject-card card-gdcd" data-grade="6 7 8 9" data-name="giáo dục công dân gdcd dao duc phap luat ky nang song">
+                        <div class="subject-header">
+                            <div class="subject-icon-box">
+                                <i class="fa-solid fa-scale-balanced"></i>
+                            </div>
+                            <span class="grade-badge">Lớp 6 - 9</span>
+                        </div>
+                        <h3 class="subject-title">Giáo Dục Công Dân</h3>
+                        <p class="subject-summary">Bồi dưỡng đạo đức, hiểu biết pháp luật, rèn luyện kỹ năng giải quyết tình huống thực tế và lối sống tích cực tuổi học trò.</p>
+                        <ul class="subject-features">
+                            <li><i class="fa-solid fa-check"></i> Xử lý tình huống đạo đức & pháp luật</li>
+                            <li><i class="fa-solid fa-check"></i> Tóm tắt kiến thức cốt lõi bằng Infographic</li>
+                            <li><i class="fa-solid fa-check"></i> Bộ câu hỏi trắc nghiệm thi học kỳ</li>
+                        </ul>
+                        <div class="subject-footer">
+                            <span class="lesson-count"><i class="fa-regular fa-folder-open"></i> 80+ Bài học</span>
+                            <button class="btn btn-sm btn-subject" onclick="openSubjectModal('gdcd')">Vào học ngay <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Môn 8: Chuyên Đề Luyện Thi Vào 10 -->
+                    <div class="subject-card card-exam10" data-grade="9" data-name="luyện thi vào 10 chuyen de toan van anh de thi thu">
+                        <div class="subject-header">
+                            <div class="subject-icon-box">
+                                <i class="fa-solid fa-medal"></i>
+                            </div>
+                            <span class="grade-badge grade-exclusive">Đặc biệt - Lớp 9</span>
+                        </div>
+                        <h3 class="subject-title">Luyện Thi Tuyển Sinh Vào 10</h3>
+                        <p class="subject-summary">Chiến thuật giải đề thi Toán - Văn - Anh của các Sở GD&ĐT cả nước, đề trường chuyên và mẹo phân bổ thời gian làm bài chuẩn xác.</p>
+                        <ul class="subject-features">
+                            <li><i class="fa-solid fa-check"></i> Đề thi chính thức 63 tỉnh thành qua các năm</li>
+                            <li><i class="fa-solid fa-check"></i> Lời giải chi tiết kèm thang điểm chấm thi</li>
+                            <li><i class="fa-solid fa-check"></i> Thi thử online bấm giờ có xếp hạng</li>
+                        </ul>
+                        <div class="subject-footer">
+                            <span class="lesson-count"><i class="fa-regular fa-folder-open"></i> 300+ Đề luyện</span>
+                            <button class="btn btn-sm btn-subject" onclick="openSubjectModal('exam10')">Vào học ngay <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 2.3: Các Tính Năng Hỗ Trợ Học Tập Độc Quyền (Learning Support Features) -->
+        <section class="section support-features-section" id="tinh-nang-ho-tro">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="sub-badge">Hệ sinh thái học tập</span>
+                    <h2 class="section-title">Công Cụ Đắc Lực Hỗ Trợ Học Sinh Cấp 2</h2>
+                    <p class="section-subtitle">Giúp học sinh tự học hiệu quả, giải quyết khúc mắc bài vở và phát triển tư duy toàn diện</p>
+                </div>
+
+                <div class="features-grid">
+                    <!-- Feature 1 -->
+                    <div class="feature-box">
+                        <div class="feature-icon bg-blue">
+                            <i class="fa-solid fa-sitemap"></i>
+                        </div>
+                        <h4 class="feature-title">Sơ Đồ Tư Duy (Mindmap)</h4>
+                        <p class="feature-desc">Toàn bộ bài học Toán, Văn, Sử, Địa, KHTN đều được tóm tắt trong 1 trang giấy dạng mindmap nhiều màu sắc, giúp nhớ bài trong 15 phút.</p>
+                        <a href="#mon-hoc" class="feature-link">Xem sơ đồ mẫu <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="feature-box">
+                        <div class="feature-icon bg-purple">
+                            <i class="fa-solid fa-stopwatch-20"></i>
+                        </div>
+                        <h4 class="feature-title">Thi Thử Bấm Giờ Trực Tuyến</h4>
+                        <p class="feature-desc">Hệ thống bài kiểm tra 15 phút, 1 tiết, học kỳ có đồng hồ đếm ngược, chấm điểm tức thì và phân tích ngay câu sai để rút kinh nghiệm.</p>
+                        <a href="#de-thi" class="feature-link">Làm bài kiểm tra <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="feature-box">
+                        <div class="feature-icon bg-green">
+                            <i class="fa-solid fa-comments-dollar-fa fa-brain"></i>
+                        </div>
+                        <h4 class="feature-title">Trợ Lý AI Giải Thích Bài Tập</h4>
+                        <p class="feature-desc">Không chỉ đưa ra kết quả, trợ lý học tập phân tích từng bước giải theo phương pháp suy luận, giúp học sinh nắm chắc bản chất bài toán.</p>
+                        <a href="#hoi-dap-ai" class="feature-link">Trải nghiệm hỏi bài <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+
+                    <!-- Feature 4 -->
+                    <div class="feature-box">
+                        <div class="feature-icon bg-orange">
+                            <i class="fa-solid fa-laptop-file"></i>
+                        </div>
+                        <h4 class="feature-title">Thư Viện Tài Liệu Miễn Phí</h4>
+                        <p class="feature-desc">Tải về miễn phí hàng nghìn tài liệu PDF: sổ tay công thức toán, cẩm nang ngữ pháp tiếng Anh, bảng hệ thống văn học cấp 2.</p>
+                        <a href="#de-thi" class="feature-link">Tải tài liệu PDF <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2.4: Trợ Lý Hỏi Đáp / Giải Bài Tập Trực Tuyến Tương Tác (Interactive Q&A Assistant) -->
+        <section class="section ai-assistant-section" id="hoi-dap-ai">
+            <div class="container">
+                <div class="assistant-card">
+                    <div class="assistant-content">
+                        <span class="sub-badge badge-glow"><i class="fa-solid fa-sparkles"></i> Tính năng tương tác trực tiếp</span>
+                        <h2 class="assistant-title">Bạn Có Bài Tập Nào Khó Cần Hỗ Trợ?</h2>
+                        <p class="assistant-subtitle">Nhập câu hỏi hoặc đề bài của bạn vào ô bên dưới, chọn môn học để nhận gợi ý phương pháp giải ngay tức khắc!</p>
+
+                        <div class="interactive-qa-form">
+                            <div class="qa-form-controls">
+                                <select id="qaSubjectSelect" class="qa-select">
+                                    <option value="Toán học">📐 Môn: Toán học</option>
+                                    <option value="Ngữ văn">📖 Môn: Ngữ văn</option>
+                                    <option value="Tiếng Anh">🌐 Môn: Tiếng Anh</option>
+                                    <option value="Khoa học Tự nhiên">🔬 Môn: KHTN (Lý - Hóa - Sinh)</option>
+                                    <option value="Lịch sử & Địa lý">🏛️ Môn: Lịch sử & Địa lý</option>
+                                </select>
+                                <select id="qaGradeSelect" class="qa-select">
+                                    <option value="Lớp 6">Khối Lớp 6</option>
+                                    <option value="Lớp 7">Khối Lớp 7</option>
+                                    <option value="Lớp 8">Khối Lớp 8</option>
+                                    <option value="Lớp 9">Khối Lớp 9</option>
+                                </select>
+                            </div>
+
+                            <div class="qa-input-group">
+                                <textarea id="qaQuestionInput" rows="3" placeholder="Ví dụ: Làm sao để rút gọn biểu thức có chứa căn bậc hai trong đề Toán 9? hoặc Phân tích tâm trạng nhân vật Lão Hạc..."></textarea>
+                                <button type="button" class="btn btn-primary btn-submit-qa" onclick="handleAskQuestion()">
+                                    <i class="fa-solid fa-paper-plane"></i> Gửi Câu Hỏi
+                                </button>
+                            </div>
+
+                            <!-- Khối hiển thị câu trả lời mẫu tương tác -->
+                            <div class="qa-response-box" id="qaResponseBox">
+                                <div class="qa-response-header">
+                                    <span class="assistant-label"><i class="fa-solid fa-robot"></i> Trợ lý học tập EduTHCS:</span>
+                                    <span class="status-tag">Đã phản hồi</span>
+                                </div>
+                                <div class="qa-response-body" id="qaResponseBody">
+                                    Hãy nhập câu hỏi bài tập của bạn ở trên để nhận lời giải mẫu và phương pháp gợi ý chi tiết từng bước nhé!
+                                </div>
+                            </div>
+
+                            <!-- Câu hỏi thường gặp nhanh -->
+                            <div class="quick-suggest-tags">
+                                <span class="tag-title">Gợi ý câu hỏi nhanh:</span>
+                                <button class="btn-tag" onclick="suggestQuestion('Cách tính diện tích hình thang và hình thoi lớp 6')">Hình thang & hình thoi lớp 6</button>
+                                <button class="btn-tag" onclick="suggestQuestion('Quy tắc nhân đa thức với đa thức trong Toán 8')">Nhân đa thức Toán 8</button>
+                                <button class="btn-tag" onclick="suggestQuestion('Các thì cơ bản thường gặp trong bài thi tiếng Anh vào 10')">Các thì đề thi vào 10</button>
+                                <button class="btn-tag" onclick="suggestQuestion('Cách cân bằng phương trình hóa học bằng phương pháp chẵn lẻ')">Cân bằng hóa học KHTN 8</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2.5: Thư Viện Đề Thi & Bài Tập Trọng Điểm (Exam Library) -->
+        <section class="section exam-library-section" id="de-thi">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="sub-badge">Ngân hàng đề kiểm tra</span>
+                    <h2 class="section-title">Đề Thi & Bài Tập Mới Nhất</h2>
+                    <p class="section-subtitle">Đề thi giữa kỳ, cuối kỳ của các trường THCS trọng điểm kèm đáp án chi tiết</p>
+                </div>
+
+                <div class="exam-cards-grid">
+                    <!-- KỲ THI ĐẶC BIỆT THỨ 2 HÀNG TUẦN -->
+                    <div class="exam-card exam-card-featured" style="border: 2px solid #2563eb; background: linear-gradient(180deg, #eff6ff 0%, #ffffff 100%);">
+                        <div class="exam-badge" style="background: #dc2626; color: #ffffff; font-weight: 800;">
+                            <i class="fa-solid fa-clock"></i> MỞ LÚC 00:00 THỨ 2
+                        </div>
+                        <h4 class="exam-title" style="color: #1e3a8a;">Kỳ Thi Khảo Sát Năng Lực Toàn Diện Cấp 2 Hàng Tuần</h4>
+                        <div class="exam-meta">
+                            <span><i class="fa-regular fa-clock"></i> 45 Phút</span>
+                            <span style="color: #dc2626; font-weight: 700;"><i class="fa-solid fa-ban"></i> Chỉ thi 01 lần duy nhất</span>
+                        </div>
+                        <p class="exam-desc">Bộ 15 câu trắc nghiệm tổng hợp Toán, Văn, Anh, KHTN bám sát SGK mới. Chấm điểm xếp hạng bảng vàng tuần.</p>
+                        <a href="exam.html" class="btn btn-primary btn-block shadow-pulse">
+                            <i class="fa-solid fa-bolt"></i> Vào Phòng Thi Trực Tuyến
+                        </a>
+                    </div>
+
+                    <div class="exam-card">
+                        <div class="exam-badge badge-midterm">Giữa Học Kỳ 1</div>
+                        <h4 class="exam-title">Đề Thi Giữa Kỳ 1 Môn Toán 9 (Có Lời Giải)</h4>
+                        <div class="exam-meta">
+                            <span><i class="fa-regular fa-clock"></i> 90 Phút</span>
+                            <span><i class="fa-regular fa-eye"></i> 8.420 lượt thi</span>
+                        </div>
+                        <p class="exam-desc">Bao gồm 70% trắc nghiệm khách quan và 30% tự luận hình học + bất đẳng thức đại số.</p>
+                        <a href="exam.html" class="btn btn-outline-primary btn-block">
+                            <i class="fa-solid fa-pen-to-square"></i> Làm Bài Thi Ngay
+                        </a>
+                    </div>
+
+                    <div class="exam-card">
+                        <div class="exam-badge badge-final">Cuối Học Kỳ 1</div>
+                        <h4 class="exam-title">Bộ Đề Kiểm Tra Tiếng Anh 8 Global Success</h4>
+                        <div class="exam-meta">
+                            <span><i class="fa-regular fa-clock"></i> 60 Phút</span>
+                            <span><i class="fa-regular fa-eye"></i> 6.130 lượt thi</span>
+                        </div>
+                        <p class="exam-desc">Kiểm tra 4 kỹ năng: Nghe (có kèm audio mp3), Đọc hiểu, Ngữ âm và Viết lại câu chuẩn.</p>
+                        <button class="btn btn-outline-primary btn-block" onclick="alert('Đang tải tệp audio và đề thi Tiếng Anh 8...')">
+                            <i class="fa-solid fa-pen-to-square"></i> Làm Bài Thi Ngay
+                        </button>
+                    </div>
+
+                    <div class="exam-card">
+                        <div class="exam-badge badge-special">Luyện Thi Vào 10</div>
+                        <h4 class="exam-title">Đề Thi Tuyển Sinh Vào 10 Chuyên Hà Nội - TP.HCM</h4>
+                        <div class="exam-meta">
+                            <span><i class="fa-regular fa-clock"></i> 120 Phút</span>
+                            <span><i class="fa-regular fa-eye"></i> 15.890 lượt thi</span>
+                        </div>
+                        <p class="exam-desc">Tổng hợp đề thi Ngữ Văn & Toán có biểu điểm chi tiết giúp rèn kỹ năng giải đề đỉnh cao.</p>
+                        <button class="btn btn-outline-primary btn-block" onclick="alert('Đang mở kho đề tuyển sinh lớp 10 tổng hợp!')">
+                            <i class="fa-solid fa-pen-to-square"></i> Làm Bài Thi Ngay
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2.6: Góc Kinh Nghiệm & Mẹo Học Giỏi Cấp 2 (Study Tips) -->
+        <section class="section tips-section" id="kinh-nghiem">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="sub-badge">Kinh nghiệm học tập</span>
+                    <h2 class="section-title">Bí Quyết Học Nhẹ Nhàng Điểm Vẫn Cao</h2>
+                    <p class="section-subtitle">Những phương pháp tự học và quản lý thời gian đã được kiểm chứng bởi học sinh giỏi</p>
+                </div>
+
+                <div class="tips-grid">
+                    <article class="tip-card">
+                        <div class="tip-icon"><i class="fa-solid fa-hourglass-start"></i></div>
+                        <div class="tip-body">
+                            <span class="tip-category">Phương Pháp Học</span>
+                            <h4 class="tip-title">Kỹ Thuật Pomodoro 25/5 Dành Cho Học Sinh THCS</h4>
+                            <p class="tip-text">Cách chia nhỏ thời gian học 25 phút tập trung cao độ và 5 phút nghỉ ngơi giúp não bộ không bị quá tải khi làm bài tập về nhà.</p>
+                        </div>
+                    </article>
+
+                    <article class="tip-card">
+                        <div class="tip-icon"><i class="fa-solid fa-pen-ruler"></i></div>
+                        <div class="tip-body">
+                            <span class="tip-category">Kỹ Năng Ghi Chép</span>
+                            <h4 class="tip-title">Phương Pháp Ghi Chép Cornell Để Học Tốt Môn Văn & Sử</h4>
+                            <p class="tip-text">Chia vở làm 3 phần: Ý chính, Chi tiết, và Tóm tắt giúp học thuộc nhanh các bài thơ, tác phẩm truyện dài mà không bị sót ý.</p>
+                        </div>
+                    </article>
+
+                    <article class="tip-card">
+                        <div class="tip-icon"><i class="fa-solid fa-bullhorn"></i></div>
+                        <div class="tip-body">
+                            <span class="tip-category">Tâm Lý Thi Cử</span>
+                            <h4 class="tip-title">Chiến Lược Phân Bổ Thời Gian Trong Phòng Thi Vào 10</h4>
+                            <p class="tip-text">Nguyên tắc "Dễ làm trước, khó làm sau", dành 10 phút cuối rà soát lại bài tính toán để không bị mất điểm oan uổng.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- ======================================================== -->
+    <!-- PHẦN 3: CHÂN TRANG (FOOTER)                              -->
+    <!-- ======================================================== -->
+    <footer class="site-footer" id="chan-trang">
+        <!-- Khối trên của Footer: Đăng ký nhận tài liệu -->
+        <div class="footer-newsletter">
+            <div class="container">
+                <div class="newsletter-card">
+                    <div class="newsletter-info">
+                        <h3><i class="fa-regular fa-envelope-open"></i> Đăng Ký Nhận Bộ Đề Thi & Sổ Tay Công Thức Miễn Phí</h3>
+                        <p>Nhận ngay cẩm nang tóm tắt kiến thức Cấp 2 gửi thẳng về email của bạn mỗi tuần.</p>
+                    </div>
+                    <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+                        <input type="email" id="newsletterEmail" placeholder="Nhập địa chỉ email của bạn..." required>
+                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Nhận Tài Liệu</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Khối chính của Footer (Main Footer Links) -->
+        <div class="footer-main">
+            <div class="container footer-grid">
+                
+                <!-- Cột 1: Giới thiệu thương hiệu -->
+                <div class="footer-col col-brand">
+                    <div class="logo footer-logo">
+                        <div class="logo-icon">
+                            <i class="fa-solid fa-book-open-reader"></i>
+                        </div>
+                        <div class="logo-text">
+                            <span class="brand-name">Edu<span class="highlight">THCS</span></span>
+                            <span class="brand-slogan">Nền tảng tri thức Cấp 2</span>
+                        </div>
+                    </div>
+                    <p class="brand-desc">
+                        EduTHCS là hệ sinh thái hỗ trợ học tập trực tuyến dành riêng cho học sinh Trung học Cơ sở (Lớp 6 đến Lớp 9), 
+                        đồng hành cùng phụ huynh và giáo viên xây dựng phương pháp học tập chủ động, khoa học và đạt kết quả cao.
+                    </p>
+                    <div class="contact-info-list">
+                        <p><i class="fa-solid fa-circle-info"></i> Đây là bản demo giao diện tĩnh EduTHCS.</p>
+                        <p><i class="fa-solid fa-floppy-disk"></i> Tài khoản và dữ liệu thử nghiệm chỉ lưu trong trình duyệt.</p>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-btn" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="social-btn" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="#" class="social-btn" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                        <a href="#" class="social-btn" title="Nhóm Học Tập Zalo"><i class="fa-solid fa-comment-nodes"></i></a>
+                    </div>
+                </div>
+
+                <!-- Cột 2: Danh mục Môn học Cấp 2 -->
+                <div class="footer-col">
+                    <h4 class="footer-heading">Môn Học Cấp 2</h4>
+                    <ul class="footer-links">
+                        <li><a href="#mon-hoc"><i class="fa-solid fa-angle-right"></i> Toán học (Đại số & Hình học)</a></li>
+                        <li><a href="#mon-hoc"><i class="fa-solid fa-angle-right"></i> Ngữ văn & Soạn văn mẫu</a></li>
+                        <li><a href="#mon-hoc"><i class="fa-solid fa-angle-right"></i> Tiếng Anh (Từ vựng & Ngữ pháp)</a></li>
+                        <li><a href="#mon-hoc"><i class="fa-solid fa-angle-right"></i> Khoa học Tự nhiên (Lý, Hóa, Sinh)</a></li>
+                        <li><a href="#mon-hoc"><i class="fa-solid fa-angle-right"></i> Lịch sử & Địa lý</a></li>
+                        <li><a href="#mon-hoc"><i class="fa-solid fa-angle-right"></i> Tin học & Lập trình THCS</a></li>
+                        <li><a href="#mon-hoc"><i class="fa-solid fa-angle-right"></i> Giáo dục công dân & Hoạt động TN</a></li>
+                    </ul>
+                </div>
+
+                <!-- Cột 3: Khối Lớp & Lộ Trình Thi -->
+                <div class="footer-col">
+                    <h4 class="footer-heading">Khối Lớp & Ôn Thi</h4>
+                    <ul class="footer-links">
+                        <li><a href="#khoi-lop" onclick="filterByGrade('6')"><i class="fa-solid fa-angle-right"></i> Hỗ trợ học tập Lớp 6</a></li>
+                        <li><a href="#khoi-lop" onclick="filterByGrade('7')"><i class="fa-solid fa-angle-right"></i> Hỗ trợ học tập Lớp 7</a></li>
+                        <li><a href="#khoi-lop" onclick="filterByGrade('8')"><i class="fa-solid fa-angle-right"></i> Hỗ trợ học tập Lớp 8</a></li>
+                        <li><a href="#khoi-lop" onclick="filterByGrade('9')"><i class="fa-solid fa-angle-right"></i> Hỗ trợ học tập Lớp 9</a></li>
+                        <li><a href="#mon-hoc"><i class="fa-solid fa-angle-right"></i> Luyện thi tuyển sinh vào Lớp 10</a></li>
+                        <li><a href="#de-thi"><i class="fa-solid fa-angle-right"></i> Đề thi Giữa kỳ & Cuối kỳ có giải</a></li>
+                        <li><a href="exam.html"><i class="fa-solid fa-angle-right"></i> <strong>Kỳ thi 00:00 Thứ 2 (Chỉ thi 1 lần)</strong></a></li>
+                    </ul>
+                </div>
+
+                <!-- Cột 4: Tiện ích & Hỗ trợ -->
+                <div class="footer-col">
+                    <h4 class="footer-heading">Hỗ Trợ Học Sinh</h4>
+                    <ul class="footer-links">
+                        <li><a href="profile.html"><i class="fa-solid fa-angle-right"></i> <strong>Hồ sơ & Trang cá nhân</strong></a></li>
+                        <li><a href="login.html"><i class="fa-solid fa-angle-right"></i> <strong>Đăng nhập tài khoản</strong></a></li>
+                        <li><a href="forgot-password.html"><i class="fa-solid fa-angle-right"></i> <strong>Quên mật khẩu / Khôi phục</strong></a></li>
+                        <li><a href="#hoi-dap-ai"><i class="fa-solid fa-angle-right"></i> Hỏi đáp bài tập 24/7</a></li>
+                        <li><a href="#kinh-nghiem"><i class="fa-solid fa-angle-right"></i> Phương pháp Pomodoro & Mindmap</a></li>
+                        <li><a href="#tinh-nang-ho-tro"><i class="fa-solid fa-angle-right"></i> Tải sách cẩm nang công thức PDF</a></li>
+                        <li><a href="#"><i class="fa-solid fa-angle-right"></i> Chính sách bảo vệ dữ liệu học sinh</a></li>
+                    </ul>
+                    <div class="security-badge">
+                        <i class="fa-solid fa-shield-halved"></i> Nền tảng an toàn, lành mạnh cho học sinh
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Khối dưới cùng (Copyright Bar) -->
+        <div class="footer-bottom">
+            <div class="container footer-bottom-container">
+                <p>&copy; 2026 <strong>EduTHCS</strong>. Bản quyền thuộc về Hệ thống Giáo dục Cấp 2 Toàn diện. Tất cả các quyền được bảo lưu.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Quy định sử dụng</a>
+                    <span class="dot">•</span>
+                    <a href="#">Chính sách bảo mật</a>
+                    <span class="dot">•</span>
+                    <a href="#">Sơ đồ trang web</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Nút cuộn nhanh lên đầu trang -->
+    <button class="back-to-top" id="backToTopBtn" title="Lên đầu trang">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- Modal Xem Chi Tiết Môn Học -->
+    <div class="modal-overlay" id="subjectModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeSubjectModal()">&times;</button>
+            <div class="modal-header">
+                <div class="modal-icon" id="modalSubjectIcon"></div>
+                <div>
+                    <h3 id="modalSubjectTitle">Tên Môn Học</h3>
+                    <p id="modalSubjectGrade" class="modal-grade-tag">Khối Lớp</p>
+                </div>
+            </div>
+            <div class="modal-body" id="modalSubjectBody">
+                <!-- Nội dung được nạp qua JS -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeSubjectModal()">Đóng</button>
+                <button class="btn btn-primary" onclick="alert('Bắt đầu lộ trình học!')">Bắt đầu học ngay</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript File -->
+    <script src="auth.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

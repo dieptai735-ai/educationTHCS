@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kỳ Thi Trực Tuyến Cấp 2 - EduTHCS</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Lexend:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="exam.css">
+</head>
+<body class="exam-body">
+
+    <!-- Toast Notification Container -->
+    <div id="toastNotification" class="toast-box"></div>
+
+    <!-- ======================================================== -->
+    <!-- THANH ĐIỀU HƯỚNG TRÊN CÙNG (TOP NAVIGATION)              -->
+    <!-- ======================================================== -->
+    <header class="exam-header">
+        <div class="container exam-header-inner">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-book-open-reader"></i>
+                </div>
+                <div class="logo-text">
+                    <span class="brand-name">Edu<span class="highlight">THCS</span></span>
+                    <span class="brand-slogan">Phòng Khảo Thí Trực Tuyến</span>
+                </div>
+            </a>
+
+            <!-- Trạng thái phòng thi & Thí sinh -->
+            <div class="exam-header-right">
+                <div class="test-mode-toggle" title="Chuyển đổi chế độ kiểm tra">
+                    <span class="mode-label"><i class="fa-solid fa-flask"></i> Chế độ thử nghiệm:</span>
+                    <button type="button" class="btn-toggle-mode active" id="btnToggleSimulateTime" onclick="toggleSimulateOpen()">
+                        <span id="simulateStatusText">Đang Mở Phòng Thi</span>
+                    </button>
+                </div>
+
+                <div class="student-exam-pill" id="candidateProfilePill">
+                    <div class="candidate-avatar">
+                        <i class="fa-solid fa-user-graduate"></i>
+                    </div>
+                    <div class="candidate-info">
+                        <strong id="candidateName">Học sinh demo</strong>
+                        <span id="candidateSBD">SBD: THCS-DEMO</span>
+                    </div>
+                </div>
+
+                <a href="index.html" class="btn btn-sm btn-outline back-home-btn" id="btnBackHome">
+                    <i class="fa-solid fa-house"></i> Trang Chủ
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ======================================================== -->
+    <!-- NỘI DUNG CHÍNH (MAIN WRAPPER VỚI 3 TRẠNG THÁI)           -->
+    <!-- ======================================================== -->
+    <main class="exam-main-container">
+        
+        <!-- ==================================================== -->
+        <!-- MÀN HÌNH 1: PHÒNG THI CHƯA MỞ (TRƯỚC 00:00 THỨ 2)   -->
+        <!-- ==================================================== -->
+        <section class="exam-state-screen" id="screenWaiting">
+            <div class="container">
+                <div class="waiting-card">
+                    <div class="waiting-badge">
+                        <i class="fa-regular fa-clock"></i> PHÒNG THI ĐANG ĐÓNG
+                    </div>
+                    
+                    <h1 class="waiting-title">
+                        Kỳ Thi Khảo Sát Năng Lực Cấp 2 Hàng Tuần <br>
+                        <span class="text-gradient">Bắt Đầu Từ 00:00 AM Thứ 2</span>
+                    </h1>
+                    
+                    <p class="waiting-desc">
+                        Hệ thống sẽ tự động mở đề thi khảo sát trực tuyến vào đúng <strong>00:00 sáng Thứ Hai hàng tuần</strong>. 
+                        Vui lòng chuẩn bị thiết bị ổn định, không gian yên tĩnh và ôn luyện kỹ kiến thức trước giờ thi.
+                    </p>
+
+                    <!-- Đồng hồ đếm ngược trực tiếp đến 00:00 AM Thứ 2 -->
+                    <div class="countdown-clock-wrapper">
+                        <div class="countdown-box">
+                            <span class="count-value" id="countDays">00</span>
+                            <span class="count-label">Ngày</span>
+                        </div>
+                        <span class="count-colon">:</span>
+                        <div class="countdown-box">
+                            <span class="count-value" id="countHours">00</span>
+                            <span class="count-label">Giờ</span>
+                        </div>
+                        <span class="count-colon">:</span>
+                        <div class="countdown-box">
+                            <span class="count-value" id="countMinutes">00</span>
+                            <span class="count-label">Phút</span>
+                        </div>
+                        <span class="count-colon">:</span>
+                        <div class="countdown-box">
+                            <span class="count-value" id="countSeconds">00</span>
+                            <span class="count-label">Giây</span>
+                        </div>
+                    </div>
+
+                    <div class="target-time-notice">
+                        <i class="fa-regular fa-calendar-check"></i>
+                        <span>Thời điểm mở đề tiếp theo: <strong id="nextMondayDisplay">00:00 AM Thứ Hai, 19/10/2026</strong></span>
+                    </div>
+
+                    <!-- Bảng Quy Chế Thi Nghiêm Ngặt -->
+                    <div class="exam-rules-box">
+                        <h3 class="rules-heading">
+                            <i class="fa-solid fa-triangle-exclamation text-warning"></i> 
+                            QUY CHẾ PHÒNG THI BẮT BUỘC DÀNH CHO HỌC SINH
+                        </h3>
+                        <ul class="rules-list">
+                            <li class="rule-strict">
+                                <i class="fa-solid fa-circle-exclamation text-danger"></i>
+                                <strong>LƯU Ý ĐẶC BIỆT - ĐÃ THI KHÔNG THỂ THI LẠI:</strong> Mỗi học sinh chỉ được quyền tham gia làm bài <u>DUY NHẤT 01 LẦN</u>. Sau khi nộp bài hoặc khi hết giờ, hệ thống sẽ tự động khóa tài khoản thi của bạn đối với kỳ thi này!
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-hourglass-half text-primary"></i>
+                                <strong>Thời gian làm bài:</strong> 45 phút không nghỉ giữa giờ. Đồng hồ đếm ngược sẽ bắt đầu chạy ngay khi bạn bấm nút "Bắt đầu làm bài".
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-shield-halved text-success"></i>
+                                <strong>Chống gian lận:</strong> Không chuyển tab trình duyệt quá 3 lần. Hệ thống tự động ghi lại lịch sử thao tác để xét giải thưởng thi đua học sinh giỏi.
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-cloud-arrow-up text-primary"></i>
+                                <strong>Tự động lưu bài:</strong> Mọi câu trả lời của bạn được lưu tức thời trên máy chủ. Nếu vô tình mất mạng hoặc tải lại trang, bài làm vẫn được bảo lưu trọn vẹn trong thời gian thi.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Nút trạng thái -->
+                    <div class="waiting-actions">
+                        <button type="button" class="btn btn-lg btn-disabled" id="btnDisabledStart" disabled>
+                            <i class="fa-solid fa-lock"></i> Chưa Đến Giờ Thi (Mở lúc 00:00 Thứ 2)
+                        </button>
+                        <button type="button" class="btn btn-lg btn-primary shadow-pulse" id="btnForceOpen" onclick="forceOpenExamForTesting()">
+                            <i class="fa-solid fa-bolt"></i> Vào Thi Thử Nghiệm Ngay (Test Mode)
+                        </button>
+                        <button type="button" class="btn btn-lg btn-warning" onclick="openWaitingLeaderboardModal()">
+                            <i class="fa-solid fa-crown"></i> Xem Bảng Vàng Tuần Này
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================================================== -->
+        <!-- MÀN HÌNH 2: GIAO DIỆN LÀM BÀI THI (EXAM ROOM)         -->
+        <!-- ==================================================== -->
+        <section class="exam-state-screen d-none" id="screenExam">
+            <div class="container exam-room-layout">
+                
+                <!-- Cột trái: Nội dung câu hỏi trắc nghiệm -->
+                <div class="exam-content-area">
+                    
+                    <!-- Thanh tiêu đề bài thi trong phòng thi -->
+                    <div class="exam-room-header">
+                        <div>
+                            <span class="badge-tag bg-blue-tag">Mã đề: THCS-GDPT26</span>
+                            <h2 class="exam-paper-title">Đề Khảo Sát Năng Lực Toàn Diện THCS (Toán - KHTN - Anh - Văn)</h2>
+                            <span class="exam-paper-info">Số câu: <strong>15 câu trắc nghiệm</strong> • Thời gian: <strong>45 phút</strong> • Hình thức: <strong>Chấm điểm tự động</strong></span>
+                        </div>
+                        <div class="timer-display-card" id="timerCard">
+                            <span class="timer-label"><i class="fa-regular fa-clock"></i> Thời gian còn lại:</span>
+                            <span class="timer-countdown" id="examCountdown">45:00</span>
+                        </div>
+                    </div>
+
+                    <!-- Cảnh báo quy chế 1 lần thi -->
+                    <div class="warning-banner-bar">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                        <span>Lưu ý: Bạn đang trong phiên làm bài chính thức. <strong>Đã thi KHÔNG THỂ thi lại</strong>. Hãy kiểm tra thật kỹ trước khi nộp bài!</span>
+                    </div>
+
+                    <!-- Khung câu hỏi đơn hiển thị trực quan -->
+                    <div class="question-paper-card" id="questionPaper">
+                        <div class="question-meta-bar">
+                            <span class="question-number-badge" id="currentQuestionNum">Câu 1 / 15</span>
+                            <span class="question-subject-badge" id="currentSubjectTag">Toán Học</span>
+                            <button type="button" class="btn-flag-question" id="btnFlagQuestion" onclick="toggleFlagQuestion()" title="Đánh dấu xem lại sau">
+                                <i class="fa-regular fa-bookmark"></i> Đánh dấu xem lại
+                            </button>
+                        </div>
+
+                        <!-- Đề bài câu hỏi -->
+                        <div class="question-text" id="questionContent">
+                            Đang tải nội dung câu hỏi...
+                        </div>
+
+                        <!-- 4 Đáp án A, B, C, D -->
+                        <div class="answers-grid" id="answersOptionsWrapper">
+                            <!-- Được render qua JavaScript -->
+                        </div>
+
+                        <!-- Nút điều hướng trước / sau -->
+                        <div class="question-nav-buttons">
+                            <button type="button" class="btn btn-secondary" id="btnPrevQuestion" onclick="navigateQuestion(-1)">
+                                <i class="fa-solid fa-arrow-left"></i> Câu Trước
+                            </button>
+                            <span class="nav-question-indicator" id="navQuestionIndicator">1 / 15</span>
+                            <button type="button" class="btn btn-primary" id="btnNextQuestion" onclick="navigateQuestion(1)">
+                                Câu Tiếp Theo <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Cột phải: Bảng điều hướng câu hỏi (Question Matrix Palette) -->
+                <aside class="exam-sidebar-palette">
+                    
+                    <div class="palette-card">
+                        <div class="palette-header">
+                            <h3><i class="fa-solid fa-table-cells"></i> Danh Sách Câu Hỏi</h3>
+                            <span class="answered-ratio" id="answeredRatio">0/15 đã làm</span>
+                        </div>
+
+                        <!-- Chú thích trạng thái -->
+                        <div class="palette-legend">
+                            <span class="legend-item"><span class="legend-dot dot-answered"></span> Đã trả lời</span>
+                            <span class="legend-item"><span class="legend-dot dot-flagged"></span> Đánh dấu</span>
+                            <span class="legend-item"><span class="legend-dot dot-empty"></span> Chưa làm</span>
+                        </div>
+
+                        <!-- Lưới nút câu hỏi 1 -> 15 -->
+                        <div class="question-palette-grid" id="questionPaletteGrid">
+                            <!-- Render bằng JS -->
+                        </div>
+
+                        <!-- Nút Nộp Bài Thi -->
+                        <div class="submit-action-box">
+                            <button type="button" class="btn btn-lg btn-danger btn-submit-exam shadow-pulse" onclick="confirmSubmitExam()">
+                                <i class="fa-solid fa-paper-plane"></i> NỘP BÀI THI NGAY
+                            </button>
+                            <span class="submit-hint-text">
+                                <i class="fa-solid fa-lock"></i> Sau khi nộp, hệ thống sẽ khóa và <strong>không thể thi lại</strong>!
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Thẻ Thông Tin Thí Sinh -->
+                    <div class="palette-card candidate-card-sidebar">
+                        <div class="candidate-row">
+                            <div class="c-avatar"><i class="fa-solid fa-user-graduate"></i></div>
+                            <div>
+                                <strong id="sidebarCandidateName">Học sinh demo</strong>
+                                <span>Lớp 9 • Trường demo</span>
+                            </div>
+                        </div>
+                        <div class="exam-rules-mini">
+                            <p><i class="fa-solid fa-shield-halved"></i> Giám sát thi tự động kích hoạt</p>
+                            <p><i class="fa-solid fa-rotate-left"></i> Cảnh báo chuyển tab: <strong id="tabSwitchCount">0 / 3</strong></p>
+                        </div>
+                    </div>
+
+                </aside>
+
+            </div>
+        </section>
+
+        <!-- ==================================================== -->
+        <!-- MÀN HÌNH 3: ĐÃ THI XONG - KHÓA BÀI THI (KHÔNG THỂ THI LẠI) -->
+        <!-- ==================================================== -->
+        <section class="exam-state-screen d-none" id="screenLocked">
+            <div class="container">
+                <div class="locked-card">
+                    
+                    <div class="locked-icon-badge">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+
+                    <div class="locked-status-pill">
+                        <i class="fa-solid fa-lock"></i> BẠN ĐÃ HOÀN THÀNH BÀI THI NÀY
+                    </div>
+
+                    <h1 class="locked-title">Kết Quả Khảo Sát Năng Lực Trực Tuyến</h1>
+                    
+                    <!-- Thông báo quy chế không thể thi lại -->
+                    <div class="strict-lock-notice">
+                        <i class="fa-solid fa-ban text-danger"></i>
+                        <div>
+                            <strong>LƯU Ý: BẠN KHÔNG THỂ THI LẠI!</strong>
+                            <p>Theo quy định kỳ thi khảo sát mở lúc 00:00 Thứ 2, mỗi thí sinh chỉ được nộp bài duy nhất 01 lần. Kết quả của bạn đã được ghi nhận vào bảng vàng học tập EduTHCS.</p>
+                        </div>
+                    </div>
+
+                    <!-- Thẻ Điểm Số & Đánh Giá -->
+                    <div class="result-summary-grid">
+                        <div class="result-box box-score">
+                            <span class="res-label">Điểm Số Của Bạn</span>
+                            <span class="res-val" id="finalScoreDisplay">9.0</span>
+                            <span class="res-sub">Thang điểm 10</span>
+                        </div>
+
+                        <div class="result-box box-correct">
+                            <span class="res-label">Số Câu Trả Lời Đúng</span>
+                            <span class="res-val text-green" id="finalCorrectDisplay">14 / 15</span>
+                            <span class="res-sub" id="finalPercentage">Đạt 93.3%</span>
+                        </div>
+
+                        <div class="result-box box-time">
+                            <span class="res-label">Thời Gian Làm Bài</span>
+                            <span class="res-val text-primary" id="finalDurationDisplay">28 phút 15 giây</span>
+                            <span class="res-sub">Thời gian tối đa: 45 phút</span>
+                        </div>
+
+                        <div class="result-box box-rank">
+                            <span class="res-label">Xếp Loại</span>
+                            <span class="res-val text-gold" id="finalRankDisplay">Xuất Sắc</span>
+                            <span class="res-sub">Top 5% toàn hệ thống</span>
+                        </div>
+                    </div>
+
+                    <!-- Thông tin chi tiết lần nộp bài -->
+                    <div class="submission-details-table">
+                        <div class="s-detail-row">
+                            <span><i class="fa-regular fa-user"></i> Thí sinh dự thi:</span>
+                            <strong id="lockCandidateName">Học sinh demo (SBD: THCS-DEMO)</strong>
+                        </div>
+                        <div class="s-detail-row">
+                            <span><i class="fa-regular fa-clock"></i> Thời điểm nộp bài:</span>
+                            <strong id="lockSubmissionTime">12:35 PM - 14/10/2026</strong>
+                        </div>
+                        <div class="s-detail-row">
+                            <span><i class="fa-solid fa-fingerprint"></i> Mã xác thực kết quả:</span>
+                            <code id="lockExamHash">EDUTEST-2026-9A1-94821</code>
+                        </div>
+                        <div class="s-detail-row">
+                            <span><i class="fa-solid fa-circle-exclamation"></i> Trạng thái khóa:</span>
+                            <span class="tag-locked"><i class="fa-solid fa-lock"></i> Đã Khóa Quyền Thi Lại</span>
+                        </div>
+                    </div>
+
+                    <!-- Nút xem đáp án chi tiết, Bảng xếp hạng & Các hành động -->
+                    <div class="locked-actions-row">
+                        <button type="button" class="btn btn-lg btn-warning shadow-pulse" onclick="scrollToLeaderboard()">
+                            <i class="fa-solid fa-trophy"></i> Bảng Xếp Hạng Thi Đua
+                        </button>
+                        <button type="button" class="btn btn-lg btn-primary" onclick="toggleReviewAnswers()">
+                            <i class="fa-solid fa-list-check"></i> <span id="btnReviewText">Xem Lại Bài Làm & Lời Giải Chi Tiết</span>
+                        </button>
+                        <a href="index.html" class="btn btn-lg btn-secondary">
+                            <i class="fa-solid fa-house"></i> Về Trang Chủ
+                        </a>
+                        <a href="user-dashboard.html" class="btn btn-lg btn-outline">
+                            <i class="fa-solid fa-chart-line"></i> Vào Góc Học Tập Cá Nhân
+                        </a>
+                    </div>
+
+                    <!-- ==================================================== -->
+                    <!-- KHU VỰC BẢNG XẾP HẠNG THI ĐUA (LEADERBOARD SAU KHI THI) -->
+                    <!-- ==================================================== -->
+                    <div class="exam-leaderboard-section" id="examLeaderboardSection">
+                        
+                        <!-- Header Bảng Xếp Hạng -->
+                        <div class="leaderboard-header-banner">
+                            <div class="lb-header-text">
+                                <span class="lb-top-tag"><i class="fa-solid fa-crown"></i> BẢNG VÀNG VINH DANH HỌC SINH GIỎI</span>
+                                <h2 class="lb-title">Bảng Xếp Hạng Kỳ Thi Khảo Sát Tuần Này</h2>
+                                <p class="lb-subtitle">Cập nhật tự động từ 00:00 Thứ 2 • Ưu tiên <strong>Điểm số cao nhất</strong> và <strong>Thời gian hoàn thành sớm nhất</strong></p>
+                            </div>
+                            <div class="lb-header-buttons">
+                                <button type="button" class="btn-share-rank" onclick="openShareResultModal()">
+                                    <i class="fa-solid fa-share-nodes"></i> Khoe Thành Tích
+                                </button>
+                                <button type="button" class="btn-refresh-rank" onclick="reloadLeaderboardView()" title="Làm mới bảng xếp hạng">
+                                    <i class="fa-solid fa-rotate"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Card Vị Trí Của Thí Sinh Hiện Tại (Highlight) -->
+                        <div class="my-rank-card" id="myRankCard">
+                            <div class="my-rank-left">
+                                <div class="my-rank-avatar" id="myRankAvatar">
+                                    <i class="fa-solid fa-user-graduate"></i>
+                                </div>
+                                <div class="my-rank-meta">
+                                    <span class="my-rank-badge"><i class="fa-solid fa-circle-check"></i> Bài làm của bạn đã được ghi nhận</span>
+                                    <h3 class="my-rank-name" id="myRankCandidateName">Học sinh demo (SBD: THCS-DEMO)</h3>
+                                    <div class="my-rank-stats">
+                                        <span><i class="fa-solid fa-star text-gold"></i> Điểm: <strong id="myRankScore">9.3</strong> / 10</span>
+                                        <span><i class="fa-solid fa-check-double text-green"></i> Đúng: <strong id="myRankCorrect">14 / 15</strong> câu</span>
+                                        <span><i class="fa-regular fa-clock text-primary"></i> Thời gian: <strong id="myRankDuration">24 phút 15 giây</strong></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="my-rank-right">
+                                <span class="rank-pos-label">THỨ HẠNG CỦA BẠN</span>
+                                <span class="rank-pos-number" id="myRankNumber">#4</span>
+                                <span class="rank-pos-tier" id="myRankTier"><i class="fa-solid fa-medal"></i> Top 5% Toàn Quốc</span>
+                            </div>
+                        </div>
+
+                        <!-- Bục Vinh Quang Top 3 (Podium 2nd - 1st - 3rd) -->
+                        <div class="podium-section">
+                            <h3 class="podium-title"><i class="fa-solid fa-award text-gold"></i> TOP 3 THỦ KHOA XUẤT SẮC NHẤT KỲ THI</h3>
+                            <div class="podium-grid" id="podiumGrid">
+                                <!-- Render bằng JS -->
+                            </div>
+                        </div>
+
+                        <!-- Bộ Lọc & Tìm Kiếm -->
+                        <div class="lb-filter-panel">
+                            <div class="lb-search-input-wrap">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                <input type="text" id="lbSearchKeyword" placeholder="Tìm kiếm theo Tên học sinh, SBD hoặc Trường..." oninput="handleLeaderboardSearch()">
+                            </div>
+                            <div class="lb-grade-tabs" id="lbGradeTabs">
+                                <button type="button" class="btn-grade-tab active" data-grade="all" onclick="filterLeaderboardByGrade('all', this)">Tất Cả Khối</button>
+                                <button type="button" class="btn-grade-tab" data-grade="9" onclick="filterLeaderboardByGrade('9', this)">Khối 9</button>
+                                <button type="button" class="btn-grade-tab" data-grade="8" onclick="filterLeaderboardByGrade('8', this)">Khối 8</button>
+                                <button type="button" class="btn-grade-tab" data-grade="7" onclick="filterLeaderboardByGrade('7', this)">Khối 7</button>
+                                <button type="button" class="btn-grade-tab" data-grade="6" onclick="filterLeaderboardByGrade('6', this)">Khối 6</button>
+                            </div>
+                        </div>
+
+                        <!-- Bảng Chi Tiết Toàn Bộ Thí Sinh -->
+                        <div class="leaderboard-table-card">
+                            <div class="table-responsive">
+                                <table class="lb-table">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-rank text-center" style="width: 75px;">Hạng</th>
+                                            <th class="col-student">Học Sinh Dự Thi</th>
+                                            <th class="col-school">Lớp & Trường</th>
+                                            <th class="col-correct text-center" style="width: 100px;">Số Câu Đúng</th>
+                                            <th class="col-score text-center" style="width: 95px;">Điểm Số</th>
+                                            <th class="col-time text-center" style="width: 135px;">Thời Gian Làm</th>
+                                            <th class="col-submitted text-center" style="width: 135px;">Thời Điểm Nộp</th>
+                                            <th class="col-badge text-center" style="width: 130px;">Danh Hiệu</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="leaderboardTbody">
+                                        <!-- Render bằng JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="lb-table-footer">
+                                <span class="lb-count-text" id="lbCountText">Đang hiển thị 10 thí sinh</span>
+                                <button type="button" class="btn-toggle-all-lb" id="btnToggleAllLb" onclick="toggleExpandLeaderboard()">
+                                    <span id="expandLbText">Xem Toàn Bộ Danh Sách Thí Sinh</span> <i class="fa-solid fa-chevron-down" id="expandLbIcon"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Khu vực xem lại đáp án chi tiết (ẩn/hiện) -->
+                    <div class="review-answers-section d-none" id="reviewAnswersSection">
+                        <h3 class="review-section-title"><i class="fa-solid fa-book-open"></i> Chi Tiết 15 Câu Hỏi & Lời Giải Chuẩn</h3>
+                        <div class="review-list" id="reviewListWrapper">
+                            <!-- Render bằng JS -->
+                        </div>
+                    </div>
+
+                    <!-- Công cụ Quản trị viên / Giám thị Mở lại bài thi (dành cho kiểm thử) -->
+                    <div class="admin-reset-helper">
+                        <span class="admin-hint-text"><i class="fa-solid fa-user-shield"></i> Dành cho Quản trị viên / Thầy cô giám thị kiểm tra hệ thống:</span>
+                        <button type="button" class="btn-admin-reset" onclick="adminResetExamAttempt()">
+                            <i class="fa-solid fa-rotate-left"></i> [Reset Test] Mở lại quyền thi thử nghiệm
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ======================================================== -->
+    <!-- MODAL XÁC NHẬN NỘP BÀI THI                               -->
+    <!-- ======================================================== -->
+    <div class="modal-overlay" id="confirmSubmitModal">
+        <div class="modal-content modal-confirm-box">
+            <div class="modal-confirm-icon">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <h2>Xác Nhận Nộp Bài Thi?</h2>
+            <div class="confirm-stat-pill">
+                Bạn đã làm được: <strong id="modalAnsweredCount">12 / 15</strong> câu hỏi
+            </div>
+            <p class="confirm-warning-text">
+                ⚠️ <strong>CẢNH BÁO QUY CHẾ:</strong> Bài thi chỉ được làm <strong>01 LẦN DUY NHẤT</strong>. 
+                Sau khi nộp bài, bạn <strong>KHÔNG THỂ THI LẠI</strong> với bất kỳ lý do nào.
+            </p>
+            <div class="modal-confirm-actions">
+                <button type="button" class="btn btn-secondary" onclick="closeSubmitModal()">
+                    <i class="fa-solid fa-arrow-left"></i> Tiếp Tục Làm Bài
+                </button>
+                <button type="button" class="btn btn-danger" onclick="executeSubmitExam()">
+                    <i class="fa-solid fa-check"></i> Tôi Chắc Chắn, Nộp Bài!
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- MODAL KHOE THÀNH TÍCH (SHARE CERTIFICATE)                -->
+    <!-- ======================================================== -->
+    <div class="modal-overlay" id="shareResultModal">
+        <div class="modal-content modal-share-box">
+            <button type="button" class="btn-close-modal" onclick="closeShareResultModal()" title="Đóng">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="cert-card-preview" id="certCardPreview">
+                <i class="fa-solid fa-award cert-crown"></i>
+                <span class="cert-sub">CHỨNG NHẬN KHẢO THÍ TRỰC TUYẾN EDUTHCS</span>
+                <h3 class="cert-title">VINH DANH HỌC SINH GIỎI TUẦN</h3>
+                <p class="cert-for">Trao tặng cho thí sinh:</p>
+                <h2 class="cert-name" id="certName">Học sinh demo</h2>
+                <p class="cert-school" id="certSchool">Lớp 9 • SBD: THCS-DEMO</p>
+                <div class="cert-score-row">
+                    <div class="cert-stat">
+                        <span>Điểm Số</span>
+                        <strong id="certScore">9.3</strong>
+                    </div>
+                    <div class="cert-stat">
+                        <span>Thứ Hạng</span>
+                        <strong id="certRank" class="text-gold">#4</strong>
+                    </div>
+                    <div class="cert-stat">
+                        <span>Thời Gian</span>
+                        <strong id="certDuration">24p 15s</strong>
+                    </div>
+                </div>
+                <div class="cert-footer">
+                    <span>Mã tra cứu: <code id="certCode">EDUTEST-2026-9A1</code></span>
+                    <span>Kỳ thi 00:00 Thứ 2</span>
+                </div>
+            </div>
+            <div class="share-actions">
+                <button type="button" class="btn btn-primary" onclick="copyShareCertificateText()">
+                    <i class="fa-solid fa-copy"></i> Sao Chép Thành Tích Để Khoe
+                </button>
+                <button type="button" class="btn btn-secondary" onclick="closeShareResultModal()">
+                    Đóng
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- MODAL XEM BẢNG VÀNG TỪ MÀN HÌNH CHỜ                     -->
+    <!-- ======================================================== -->
+    <div class="modal-overlay" id="waitingLeaderboardModal">
+        <div class="modal-content" style="max-width: 860px; text-align: left; max-height: 90vh; overflow-y: auto; padding: 30px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 14px;">
+                <h2 style="font-size: 1.35rem; color: #1e3a8a; margin: 0; display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-crown text-gold"></i> Bảng Vàng Vinh Danh Thí Sinh Tuần Này
+                </h2>
+                <button type="button" class="btn-close-modal" onclick="closeWaitingLeaderboardModal()" style="position: static;">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div id="waitingLeaderboardModalContent">
+                <!-- Render bằng JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Files -->
+    <script src="auth.js"></script>
+    <script src="exam.js"></script>
+</body>
+</html>
